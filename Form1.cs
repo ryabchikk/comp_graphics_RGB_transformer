@@ -27,7 +27,7 @@ namespace Lab2
             pb = this.PB_HIST_1;
             pb2 = this.PB_SOURCE;
 
-            pb2.Image = Image.FromFile("cat.png");
+            pb2.Image = Image.FromFile(@"../../cat.png");
             bitmap = new Bitmap(pb2.Image,pb2.Width,pb2.Height);
 
             graphics = pb.CreateGraphics();
