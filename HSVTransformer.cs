@@ -21,7 +21,6 @@ namespace Lab2
             pb_source = source;
             pb_hsv = hsv;
             was_initialized = false;
-           
         }
 
         private Color GetColorFromHSV(double H, double S, double V)

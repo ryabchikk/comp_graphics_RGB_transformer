@@ -79,10 +79,10 @@ namespace Lab2
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(1166, 536);
+            this.button1.Location = new System.Drawing.Point(1157, 533);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(129, 27);
+            this.button1.Size = new System.Drawing.Size(129, 28);
             this.button1.TabIndex = 1;
             this.button1.Text = "Upload photo";
             this.button1.UseVisualStyleBackColor = true;
@@ -173,7 +173,7 @@ namespace Lab2
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1166, 605);
+            this.button4.Location = new System.Drawing.Point(1158, 605);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(129, 28);
@@ -184,7 +184,7 @@ namespace Lab2
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1021, 535);
+            this.button5.Location = new System.Drawing.Point(1021, 533);
             this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(129, 28);
@@ -195,7 +195,7 @@ namespace Lab2
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1166, 569);
+            this.button6.Location = new System.Drawing.Point(1158, 569);
             this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(129, 28);
@@ -269,7 +269,7 @@ namespace Lab2
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(994, 13);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(27, 25);
@@ -281,7 +281,7 @@ namespace Lab2
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.ForeColor = System.Drawing.Color.Red;
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label5.Location = new System.Drawing.Point(668, 13);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(25, 25);
@@ -293,7 +293,7 @@ namespace Lab2
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.ForeColor = System.Drawing.Color.Navy;
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.label6.Location = new System.Drawing.Point(668, 341);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(25, 25);
