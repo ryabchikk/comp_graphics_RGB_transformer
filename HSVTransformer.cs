@@ -15,6 +15,7 @@ namespace Lab2
         PictureBox pb_hsv;
 
         private bool was_initialized;
+        
         public HSVTransformer(PictureBox source,PictureBox hsv)
         {
             pb_source = source;
@@ -32,8 +33,7 @@ namespace Lab2
         {
          
 
-            if (!was_initialized)
-            {
+            if (!was_initialized) {
                 was_initialized = true;
                 pb_hsv.Image = (Image)pb_source.Image.Clone();
             }
@@ -42,13 +42,15 @@ namespace Lab2
 
             using (var fastBitmap = new FastBitmap.FastBitmap(bitmap_hsv))
             {
-                for (var x = 0; x < fastBitmap.Width; x++)
-                    for (var y = 0; y < fastBitmap.Height; y++)
+                for (var x = 0; x < fastBitmap.Width; x++) 
+                { 
+                     for (var y = 0; y < fastBitmap.Height; y++)
                     {
                         var color = fastBitmap[x, y];
                         fastBitmap[x, y] = GetColorFromHSV(H,S,V);
                     }
-
+                }
+                   
             }
 
             Graphics graphics = pb_hsv.CreateGraphics();

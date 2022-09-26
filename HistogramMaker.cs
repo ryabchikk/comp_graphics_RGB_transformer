@@ -29,7 +29,7 @@ namespace Lab2
         {
             Bitmap bitmap = new Bitmap(pb_source.Image,rect.Width,rect.Height);
             var histPoints = GetHist(256,bitmap ,func);
-            g.Clear(Color.White);
+            g.Clear(Color.Black);
             float max = histPoints.Max();
             if (max > 0)
 

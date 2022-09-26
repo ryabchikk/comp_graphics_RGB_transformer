@@ -105,6 +105,5 @@ namespace Lab2
         {
             hsvTransformer.Tranform(GetH(), GetS(), GetV());
         }
-
     }
 }
