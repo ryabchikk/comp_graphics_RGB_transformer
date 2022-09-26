@@ -40,7 +40,9 @@ namespace Lab2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            trackBar2.Value = 50;
+            trackBar3.Value = 50;
+            hsvTransformer.Tranform(GetH(), GetS(), GetV());
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -86,7 +88,7 @@ namespace Lab2
         private double GetH()
         {
             var H = this.trackBar1.Value;
-            return 360 * H / 100.0;
+            return H;
         }
 
         private double GetS()
@@ -102,6 +104,21 @@ namespace Lab2
         }
 
         private void button6_Click(object sender, EventArgs e)
+        {
+            hsvTransformer.Tranform(GetH(), GetS(), GetV());
+        }
+
+        private void trackBar2_Scroll(object sender, EventArgs e)
+        {
+            hsvTransformer.Tranform(GetH(), GetS(), GetV());
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            hsvTransformer.Tranform(GetH(), GetS(), GetV());
+        }
+
+        private void trackBar3_Scroll(object sender, EventArgs e)
         {
             hsvTransformer.Tranform(GetH(), GetS(), GetV());
         }

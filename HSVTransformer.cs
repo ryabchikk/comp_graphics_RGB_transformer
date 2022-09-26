@@ -23,19 +23,21 @@ namespace Lab2
             was_initialized = false;
         }
 
-        private Color GetColorFromHSV(double H, double S, double V)
+        private Color GetColorFromHSV(double degreeH, double degreeS, double degreeV,Color pixel)
         {
             return Color.White;
         }
 
         public void Tranform(double H,double S,double V)
         {
-         
-
+            
             if (!was_initialized) {
                 was_initialized = true;
                 pb_hsv.Image = (Image)pb_source.Image.Clone();
             }
+            
+            pb_hsv.Image.Dispose();
+            pb_hsv.Image = (Image)pb_source.Image.Clone();
 
             Bitmap bitmap_hsv = (Bitmap)pb_hsv.Image;
 
@@ -44,10 +46,10 @@ namespace Lab2
                 for (var x = 0; x < fastBitmap.Width; x++) 
                 { 
                      for (var y = 0; y < fastBitmap.Height; y++)
-                    {
+                     {
                         var color = fastBitmap[x, y];
-                        fastBitmap[x, y] = GetColorFromHSV(H,S,V);
-                    }
+                        fastBitmap[x, y] = GetColorFromHSV(H, S, V,color );
+                     }
                 }
                    
             }
