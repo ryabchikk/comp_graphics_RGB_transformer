@@ -21,8 +21,8 @@ namespace Lab2
         {
             InitializeComponent();
             pb2 = this.PB_SOURCE;
-
             pb2.Image = Image.FromFile(@"../../cat.png");
+
             bitmap = new Bitmap(pb2.Image,pb2.Width,pb2.Height);
             hsvTransformer = new HSVTransformer(PB_SOURCE, PB_HSV);
         }
@@ -38,13 +38,6 @@ namespace Lab2
         {
 
         }
-     
-
-        private void pictureBox7_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button4_Click(object sender, EventArgs e)
         {
             Form2 fm2 = new Form2();
@@ -71,6 +64,7 @@ namespace Lab2
 
         private void button6_Click(object sender, EventArgs e)
         {
+           
             hsvTransformer.Tranform(GetH(), GetS(), GetV());
         }
 

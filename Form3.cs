@@ -19,10 +19,8 @@ namespace Lab2
 
             Form1 fm1 = new Form1();
             grayTransformer = new GrayTransformer(fm1.PB_SOURCE, PB_YUV, PB_HDTV, PB_DIFF);
-            Bitmap bitmap_YUV = grayTransformer.first();
-            Bitmap bitmap_HDTV = grayTransformer.second();
-            GenHistogram(bitmap_YUV, 1);
-            GenHistogram(bitmap_HDTV, 2);
+
+            
         }
         public void GenHistogram(Bitmap source1, int chartt)
         {
@@ -56,7 +54,11 @@ namespace Lab2
         {
             grayTransformer.TransformToYUV();
             grayTransformer.TransformToHDTV();
-            grayTransformer.CalcDifference();
+            grayTransformer.CalcDifference();            
+            Bitmap bitmap_YUV = grayTransformer.first();
+            Bitmap bitmap_HDTV = grayTransformer.second();
+            GenHistogram(bitmap_YUV, 1);
+            GenHistogram(bitmap_HDTV, 2);
         }
 
         private void chart3_Click(object sender, EventArgs e)

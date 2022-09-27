@@ -20,6 +20,7 @@ namespace Lab2
         {
             pb_source = source;
             pb_hsv = hsv;
+            
             was_initialized = false;
         }
         private double CalculateValue(double max,double degreeV) 
@@ -107,7 +108,6 @@ namespace Lab2
             CheckColor(ref R);
             CheckColor(ref G);
             CheckColor(ref B);
-
             return Color.FromArgb(255, (int)R, (int)G, (int)B);
 
         }
@@ -122,7 +122,7 @@ namespace Lab2
             
             pb_hsv.Image.Dispose();
             pb_hsv.Image = (Image)pb_source.Image.Clone();
-
+            
             Bitmap bitmap_hsv = (Bitmap)pb_hsv.Image;
 
             using (var fastBitmap = new FastBitmap.FastBitmap(bitmap_hsv))
@@ -133,11 +133,12 @@ namespace Lab2
                      {
                         var color = fastBitmap[x, y];
                         fastBitmap[x, y] = GetColorFromHSV(H, S, V,color );
+                        
                      }
                 }
                    
             }
-
+            
             Graphics graphics = pb_hsv.CreateGraphics();
             graphics.DrawImage(bitmap_hsv, 0, 0);
         }
