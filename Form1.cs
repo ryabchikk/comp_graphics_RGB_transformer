@@ -15,27 +15,16 @@ namespace Lab2
     public partial class Form1 : Form
     {
         Bitmap bitmap;
-        Graphics graphics;
-        PictureBox pb;
         PictureBox pb2;
-        GrayTransformer grayTransformer;
-        HistogramMaker histMaker;
         HSVTransformer hsvTransformer;
         public Form1()
         {
             InitializeComponent();
-            pb = this.PB_HIST_1;
             pb2 = this.PB_SOURCE;
 
             pb2.Image = Image.FromFile(@"../../cat.png");
             bitmap = new Bitmap(pb2.Image,pb2.Width,pb2.Height);
-
-            graphics = pb.CreateGraphics();
-            graphics.DrawImage(bitmap,0,0);
-
-            grayTransformer = new GrayTransformer(PB_SOURCE,PB_YUV,PB_HDTV,PB_DIFF);
-            histMaker = new HistogramMaker(PB_SOURCE);
-            hsvTransformer = new HSVTransformer(PB_SOURCE, PB_YUV);
+            hsvTransformer = new HSVTransformer(PB_SOURCE, PB_HSV);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,16 +40,6 @@ namespace Lab2
         }
      
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            grayTransformer.TransformToYUV();
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            grayTransformer.TransformToHDTV();
-        }
-
         private void pictureBox7_Click(object sender, EventArgs e)
         {
 
@@ -68,22 +47,9 @@ namespace Lab2
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Graphics g = PB_HIST_1.CreateGraphics();
-            histMaker.DrawHistogram(g, new Rectangle(0, 0, PB_HIST_1.Width, PB_HIST_1.Height),Brushes.Red,x => x.R);
-
-             g = PB_HIST_2.CreateGraphics();
-            histMaker.DrawHistogram(g, new Rectangle(0, 0, PB_HIST_2.Width, PB_HIST_2.Height), Brushes.Green, x => x.G);
-
-             g = PB_HIST_3.CreateGraphics();
-            histMaker.DrawHistogram(g, new Rectangle(0, 0, PB_HIST_3.Width, PB_HIST_3.Height), Brushes.Blue, x => x.B);
-
+            Form2 fm2 = new Form2();
+            fm2.ShowDialog();
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            grayTransformer.CalcDifference();
-        }
-
 
         private double GetH()
         {
@@ -122,5 +88,12 @@ namespace Lab2
         {
             hsvTransformer.Tranform(GetH(), GetS(), GetV());
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Form3 fm3 = new Form3();
+            fm3.ShowDialog();
+        }
+
     }
 }
