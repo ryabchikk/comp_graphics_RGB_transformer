@@ -74,6 +74,7 @@ namespace Lab2
             
             V = CalculateValue(max, degreeV);
             S = CalculateSaturation(max, min, degreeS);
+            H *= degreeH;
 
             if (S == 0) { 
                 R = G = B = V;
