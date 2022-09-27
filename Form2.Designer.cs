@@ -39,6 +39,7 @@ namespace Lab2
             this.PB_IMG_R = new System.Windows.Forms.PictureBox();
             this.PB_IMG_G = new System.Windows.Forms.PictureBox();
             this.PB_IMG_B = new System.Windows.Forms.PictureBox();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PB_HIST_1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_HIST_2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_HIST_3)).BeginInit();
@@ -52,10 +53,9 @@ namespace Lab2
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold);
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(9, 275);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Location = new System.Drawing.Point(12, 338);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 19);
+            this.label5.Size = new System.Drawing.Size(21, 23);
             this.label5.TabIndex = 22;
             this.label5.Text = "R";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -63,10 +63,10 @@ namespace Lab2
             // PB_HIST_1
             // 
             this.PB_HIST_1.BackColor = System.Drawing.SystemColors.Desktop;
-            this.PB_HIST_1.Location = new System.Drawing.Point(9, 275);
-            this.PB_HIST_1.Margin = new System.Windows.Forms.Padding(2);
+            this.PB_HIST_1.Location = new System.Drawing.Point(12, 338);
+            this.PB_HIST_1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PB_HIST_1.Name = "PB_HIST_1";
-            this.PB_HIST_1.Size = new System.Drawing.Size(240, 260);
+            this.PB_HIST_1.Size = new System.Drawing.Size(320, 320);
             this.PB_HIST_1.TabIndex = 21;
             this.PB_HIST_1.TabStop = false;
             // 
@@ -75,10 +75,9 @@ namespace Lab2
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(253, 275);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Location = new System.Drawing.Point(337, 338);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 19);
+            this.label4.Size = new System.Drawing.Size(21, 23);
             this.label4.TabIndex = 24;
             this.label4.Text = "G";
             this.label4.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -86,10 +85,10 @@ namespace Lab2
             // PB_HIST_2
             // 
             this.PB_HIST_2.BackColor = System.Drawing.SystemColors.Desktop;
-            this.PB_HIST_2.Location = new System.Drawing.Point(253, 275);
-            this.PB_HIST_2.Margin = new System.Windows.Forms.Padding(2);
+            this.PB_HIST_2.Location = new System.Drawing.Point(337, 338);
+            this.PB_HIST_2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PB_HIST_2.Name = "PB_HIST_2";
-            this.PB_HIST_2.Size = new System.Drawing.Size(240, 260);
+            this.PB_HIST_2.Size = new System.Drawing.Size(320, 320);
             this.PB_HIST_2.TabIndex = 23;
             this.PB_HIST_2.TabStop = false;
             // 
@@ -98,10 +97,9 @@ namespace Lab2
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(497, 275);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Location = new System.Drawing.Point(663, 338);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 19);
+            this.label6.Size = new System.Drawing.Size(21, 23);
             this.label6.TabIndex = 26;
             this.label6.Text = "B";
             this.label6.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -109,18 +107,19 @@ namespace Lab2
             // PB_HIST_3
             // 
             this.PB_HIST_3.BackColor = System.Drawing.SystemColors.Desktop;
-            this.PB_HIST_3.Location = new System.Drawing.Point(497, 275);
-            this.PB_HIST_3.Margin = new System.Windows.Forms.Padding(2);
+            this.PB_HIST_3.Location = new System.Drawing.Point(663, 338);
+            this.PB_HIST_3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PB_HIST_3.Name = "PB_HIST_3";
-            this.PB_HIST_3.Size = new System.Drawing.Size(240, 260);
+            this.PB_HIST_3.Size = new System.Drawing.Size(320, 320);
             this.PB_HIST_3.TabIndex = 25;
             this.PB_HIST_3.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(325, 550);
+            this.button1.Location = new System.Drawing.Point(363, 678);
+            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(99, 29);
+            this.button1.Size = new System.Drawing.Size(132, 36);
             this.button1.TabIndex = 27;
             this.button1.Text = "Draw histograms";
             this.button1.UseVisualStyleBackColor = true;
@@ -129,39 +128,51 @@ namespace Lab2
             // PB_IMG_R
             // 
             this.PB_IMG_R.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.PB_IMG_R.Location = new System.Drawing.Point(9, 11);
-            this.PB_IMG_R.Margin = new System.Windows.Forms.Padding(2);
+            this.PB_IMG_R.Location = new System.Drawing.Point(12, 14);
+            this.PB_IMG_R.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PB_IMG_R.Name = "PB_IMG_R";
-            this.PB_IMG_R.Size = new System.Drawing.Size(240, 260);
+            this.PB_IMG_R.Size = new System.Drawing.Size(320, 320);
             this.PB_IMG_R.TabIndex = 28;
             this.PB_IMG_R.TabStop = false;
             // 
             // PB_IMG_G
             // 
             this.PB_IMG_G.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.PB_IMG_G.Location = new System.Drawing.Point(253, 11);
-            this.PB_IMG_G.Margin = new System.Windows.Forms.Padding(2);
+            this.PB_IMG_G.Location = new System.Drawing.Point(337, 14);
+            this.PB_IMG_G.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PB_IMG_G.Name = "PB_IMG_G";
-            this.PB_IMG_G.Size = new System.Drawing.Size(240, 260);
+            this.PB_IMG_G.Size = new System.Drawing.Size(320, 320);
             this.PB_IMG_G.TabIndex = 29;
             this.PB_IMG_G.TabStop = false;
             // 
             // PB_IMG_B
             // 
             this.PB_IMG_B.BackColor = System.Drawing.SystemColors.WindowFrame;
-            this.PB_IMG_B.Location = new System.Drawing.Point(497, 11);
-            this.PB_IMG_B.Margin = new System.Windows.Forms.Padding(2);
+            this.PB_IMG_B.Location = new System.Drawing.Point(663, 14);
+            this.PB_IMG_B.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PB_IMG_B.Name = "PB_IMG_B";
-            this.PB_IMG_B.Size = new System.Drawing.Size(240, 260);
+            this.PB_IMG_B.Size = new System.Drawing.Size(320, 320);
             this.PB_IMG_B.TabIndex = 30;
             this.PB_IMG_B.TabStop = false;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(534, 678);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(132, 36);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "Draw Color Layers";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form2
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.ClientSize = new System.Drawing.Size(744, 591);
+            this.ClientSize = new System.Drawing.Size(992, 727);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.PB_IMG_B);
             this.Controls.Add(this.PB_IMG_G);
             this.Controls.Add(this.PB_IMG_R);
@@ -173,7 +184,7 @@ namespace Lab2
             this.Controls.Add(this.label5);
             this.Controls.Add(this.PB_HIST_1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form2";
             this.Text = "Form2";
             this.Load += new System.EventHandler(this.Form2_Load);
@@ -200,5 +211,6 @@ namespace Lab2
         private System.Windows.Forms.PictureBox PB_IMG_R;
         private System.Windows.Forms.PictureBox PB_IMG_G;
         private System.Windows.Forms.PictureBox PB_IMG_B;
+        private System.Windows.Forms.Button button2;
     }
 }
