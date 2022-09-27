@@ -40,6 +40,35 @@ namespace Lab2
                 }
         }
 
+        public void GetEachChannel(PictureBox pb_r, PictureBox pb_g, PictureBox pb_b)
+        {
+            DrawChannel(pb_r, color => Color.FromArgb(color.A, color.R, 0,0));
+            DrawChannel(pb_b, color => Color.FromArgb(color.A, 0, 0, color.B));
+            DrawChannel(pb_g, color => Color.FromArgb(color.A, 0, color.G, 0));
+        }
+
+
+        private void DrawChannel(PictureBox target,Func<Color,Color> transformer)
+        {
+            Bitmap bitmap_source = (Bitmap)pb_source.Image;
+            Bitmap bitmap_target = new Bitmap(bitmap_source.Width, bitmap_source.Height);
+
+            using (var fstbmp = new FastBitmap.FastBitmap(bitmap_target))
+            using (var fastBitmap = new FastBitmap.FastBitmap(bitmap_source))
+            {
+                for (var x = 0; x < fastBitmap.Width; x++)
+                {
+                    for (var y = 0; y < fastBitmap.Height; y++)
+                    {
+                        fstbmp[x, y] = transformer(fastBitmap[x, y]); 
+                    }
+                }
+
+            }
+
+            Graphics graphics = target.CreateGraphics();
+            graphics.DrawImage(bitmap_target, 0, 0);
+        }
 
     }
 }
