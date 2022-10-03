@@ -27,7 +27,6 @@ namespace Lab3
             pbox = this.pictureBox1;
 
             bmp = new Bitmap(pbox.Width, pbox.Height);
-            //pbox.Image = bmp;
 
             pbox.Image = bmp ;
 
@@ -204,26 +203,30 @@ namespace Lab3
            
             
             float y = start.Y + gradient;
-           
 
+            Brush brush;
             for (int x = start.X+1; x < end.X; x++)
             {
 
-                using(var btmp = new Bitmap(1, 1))
-                {
-                    btmp.SetPixel(0, 0, Color.FromArgb((int)(1 - (y - (int)y)), 0, 0, 0));
-                    g.DrawImage(btmp,x,(int)y);
-                }
+                  int color = (int)((1 - (y - (int)y))*255);
+                  Color c = Color.FromArgb(color, 0, 0, 0);
+                 brush = (Brush)(new SolidBrush(c));
+                g.FillRectangle(brush, x, (int)y, 1, 1);
 
-                using (var btmp = new Bitmap(1, 1))
-                {
-                    btmp.SetPixel(0, 0, Color.FromArgb((int)(y - (int)y), 0, 0, 0));
-                    g.DrawImage(btmp, x, (int)y + 1);
-                }
-              
+                color = (int)((y - (int)y) * 255);
+                c = Color.FromArgb(color, 0, 0, 0);
+                brush = (Brush)(new SolidBrush(c));
+             
+                
+                g.FillRectangle(brush, x, (int)y + 1, 1, 1);
+
+                brush.Dispose();
+
+
                 y += gradient;
             }
 
+           
         }
 
 
@@ -234,19 +237,25 @@ namespace Lab3
            
             float gradient = delta_x / delta_y;
             float x = start.X + gradient;
+            Brush brush;
             for (int y = start.Y+1; y < end.Y; y++)
             {
-                var btmp = new Bitmap(1, 1);
-                
-                    btmp.SetPixel(0, 0, Color.FromArgb((int)(1 - (x - (int)x)), 0, 0, 0));
-                    g.DrawImage(btmp, (int)x, y);
-                
 
-                var btmp1 = new Bitmap(1, 1);
-                
-                    btmp1.SetPixel(0, 0, Color.FromArgb((int)(x - (int)x), 0, 0, 0));
-                    g.DrawImage(btmp1, (int)x+1,y);
-                
+                int color = (int)((1 - (x - (int)x)) * 255);
+                Color c = Color.FromArgb(color, 0, 0, 0);
+                brush = (Brush)(new SolidBrush(c));
+                g.FillRectangle(brush, (int)x,y, 1, 1);
+
+                color = (int)((x - (int)x) * 255);
+                c = Color.FromArgb(color, 0, 0, 0);
+                brush = (Brush)(new SolidBrush(c));
+
+
+                g.FillRectangle(brush, (int)x+1, y, 1, 1);
+
+                brush.Dispose();
+
+
                 x += gradient;
             }
           
