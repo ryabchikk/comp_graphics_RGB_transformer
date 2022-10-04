@@ -19,15 +19,17 @@ namespace Lab3
 
     public partial class Form1 : Form
     {
-
-
         Bitmap bmp;
         PictureBox pbox;
         Graphics g;
+        TextureBrush textureBrush;
+        HashSet<Point> filledPoints = new HashSet<Point>();
+        Color borderColor = Color.FromArgb(255, 0, 0, 0);
 
         Point? prev;
         bool DrawButtonIsPressed;
         bool FillColorButtonIsPressed;
+        bool FillTextureButtonIsPressed;
         Color AreaBorder { get; set; }
         public Form1()
         {
@@ -41,7 +43,7 @@ namespace Lab3
 
              g =  Graphics.FromImage(pictureBox__t_1.Image);
             //g = pictureBox__t_1.CreateGraphics();
-            AreaBorder = Color.Black;
+            AreaBorder = Color.FromArgb(255, 0, 0, 0);
             g.Clear(Color.Silver);
         }
 
@@ -70,15 +72,6 @@ namespace Lab3
 
         }
 
-        private void DoAction(Point? p)
-        {
-            if (FillColorButtonIsPressed)
-            {
-                RecursiveFill(prev.Value, bmp.GetPixel(prev.Value.X, prev.Value.Y), new ConstantColor(Color.Red));
-                return;
-            }
-
-        }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -90,8 +83,15 @@ namespace Lab3
                // RecursiveFill(new Point(151,154), Color.Red, new ConstantColor(Color.Red));
                 pictureBox__t_1.Invalidate();
             }
+
+            if (FillTextureButtonIsPressed)
+            {
+                textureFill2(e.Location);
+            }
+
             else
             {
+
                 pictureBox1_MouseMove(sender, e);
                
                //  g.DrawLine(Pens.Black, 150, 150, 153, 150);
@@ -110,7 +110,7 @@ namespace Lab3
             if (CanDraw(prev, DrawButtonIsPressed))
             {
 
-                g.DrawLine(new Pen(Color.Black,1), prev.Value, e.Location);
+                g.DrawLine(new Pen(Color.FromArgb(255, 0, 0, 0),1), prev.Value, e.Location);
                 prev = e.Location;
                 pictureBox__t_1.Invalidate();
                 // pbox.Refresh();
@@ -203,6 +203,106 @@ namespace Lab3
             DrawButtonIsPressed = false;
             FillColorButtonIsPressed = !FillColorButtonIsPressed;
         }
+
+     
+        private void loadFillImage()
+        {
+            OpenFileDialog openDialog = new OpenFileDialog();
+            openDialog.Filter =
+                "Image Files(*.BMP;*.JPG;*.JPEG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG|All files (*.*)|*.*";
+            if (openDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Image img = Image.FromFile(openDialog.FileName);
+                    textureBrush = new TextureBrush(img);
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
+                        "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private Color getColorAt(Point point)
+        {
+            if (pictureBox__t_1.ClientRectangle.Contains(point))
+                return ((Bitmap)pictureBox__t_1.Image).GetPixel(point.X, point.Y);
+            else
+                return Color.FromArgb(255, 0, 0, 0);
+        }
+
+        private void DrawHorizontalLineTexture(int x1, int x2, int y)
+        {
+            g.FillRectangle(textureBrush, x1, y, Math.Abs(x2 - x1) + 1, 1);
+            for (int i = x1; i <= x2; ++i)
+                filledPoints.Add(new Point(i, y));
+        }
+
+        private void textureFill2(Point p)
+        {
+            Color curr = getColorAt(p);
+            Point leftPoint = p;
+            Point rightPoint = p;
+            if (!filledPoints.Contains(p) && pictureBox__t_1.ClientRectangle.Contains(p) && curr != borderColor)
+            {
+                pictureBox__t_1.Invalidate();
+
+                while (curr != borderColor && pictureBox__t_1.ClientRectangle.Contains(leftPoint))
+                {
+                    leftPoint.X -= 1;
+                    curr = getColorAt(leftPoint);
+                }
+
+                leftPoint.X += 1;
+                
+                curr = getColorAt(p);
+
+                while (curr != borderColor && pictureBox__t_1.ClientRectangle.Contains(rightPoint))
+                {
+                    rightPoint.X += 1;
+                    curr = getColorAt(rightPoint);
+                }
+                rightPoint.X -= 1;
+                
+                
+                DrawHorizontalLineTexture(leftPoint.X, rightPoint.X, leftPoint.Y);
+                
+                for (int i = leftPoint.X; i <= rightPoint.X; ++i)
+                {
+                    Point upPoint = new Point(i, p.Y + 1);
+                    Color upC = getColorAt(upPoint);
+                    if (!filledPoints.Contains(upPoint) && upC.ToArgb() != borderColor.ToArgb() && pictureBox__t_1.ClientRectangle.Contains(upPoint))
+                        textureFill2(upPoint);
+                }
+                
+                
+                for (int i = leftPoint.X; i < rightPoint.X; ++i)
+                {
+                    Point downPoint = new Point(i, p.Y - 1);
+                    Color downC = getColorAt(downPoint);
+                    if (!filledPoints.Contains(downPoint) && downC.ToArgb() != borderColor.ToArgb() && pictureBox__t_1.ClientRectangle.Contains(downPoint))
+                        textureFill2(downPoint);
+                }
+                return;
+            }
+            
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            loadFillImage();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DrawButtonIsPressed = false;
+            FillColorButtonIsPressed = false;
+            FillTextureButtonIsPressed = true;
+            
+        }
+
     }
 
     class ConstantColor : IColorable
@@ -219,4 +319,6 @@ namespace Lab3
             return color;
         }
     }
+
+
 }
