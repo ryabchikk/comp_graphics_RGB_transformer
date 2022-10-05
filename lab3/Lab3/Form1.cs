@@ -25,11 +25,13 @@ namespace Lab3
         TextureBrush textureBrush;
         HashSet<Point> filledPoints = new HashSet<Point>();
         Color borderColor = Color.FromArgb(255, 0, 0, 0);
+        Point mouseCoord;
 
         Point? prev;
         bool DrawButtonIsPressed;
         bool FillColorButtonIsPressed;
         bool FillTextureButtonIsPressed;
+        bool FillBorderIsPressed;
         Color AreaBorder { get; set; }
         public Form1()
         {
@@ -76,6 +78,7 @@ namespace Lab3
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             prev = e.Location;
+            mouseCoord = e.Location;
             if (FillColorButtonIsPressed)
             {
 
@@ -87,6 +90,12 @@ namespace Lab3
             if (FillTextureButtonIsPressed)
             {
                 textureFill2(e.Location);
+            }
+
+            if (FillBorderIsPressed)
+            {
+                pictureBox__t_1.Invalidate();
+                selectBorder(Color.Red);
             }
 
             else
@@ -120,7 +129,7 @@ namespace Lab3
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             prev = null;
-          
+            mouseCoord = e.Location;
         }
 
         private bool IsWindowBorder(Point p)
@@ -299,10 +308,86 @@ namespace Lab3
         {
             DrawButtonIsPressed = false;
             FillColorButtonIsPressed = false;
-            FillTextureButtonIsPressed = true;
+            FillTextureButtonIsPressed = !FillTextureButtonIsPressed;
+            FillBorderIsPressed = false;
             
         }
 
+        // найти точку, принадлежащую границе
+        private Point findStartPoint()
+        {
+            int x = mouseCoord.X;
+            int y = mouseCoord.Y;
+
+            Color bgColor = bmp.GetPixel(mouseCoord.X, mouseCoord.Y);
+            Color currColor = bgColor;
+            while (x < bmp.Width - 2 && currColor.ToArgb() == bgColor.ToArgb())
+            {
+                x++;
+                currColor = bmp.GetPixel(x, y);
+            }
+
+            return new Point(x, y);
+        }
+        private void selectBorder(Color c)
+        {
+            List<Point> pixels = new List<Point>();
+            Point curr = findStartPoint();
+            Point start = curr;
+            pixels.Add(start);
+            Color borderColor = bmp.GetPixel(curr.X, curr.Y);
+
+            Point next = new Point();
+            int currDir = 6;
+            int nextDir = -1;
+            int moveTo = 0;
+            // определяем направление движения
+            do
+            {
+                // двигаемся в выбранном направлении
+                moveTo = (currDir - 2 + 8) % 8;
+                int mt = moveTo;
+                do
+                {
+                    next = curr;
+                    switch (moveTo)
+                    {
+                        case 0: next.X++; nextDir = 0; break;
+                        case 1: next.X++; next.Y--; nextDir = 1; break;
+                        case 2: next.Y--; nextDir = 2; break;
+                        case 3: next.X--; next.Y--; nextDir = 3; break;
+                        case 4: next.X--; nextDir = 4; break;
+                        case 5: next.X--; next.Y++; nextDir = 5; break;
+                        case 6: next.Y++; nextDir = 6; break;
+                        case 7: next.X++; next.Y++; nextDir = 7; break;
+                    }
+
+                    if (next == start )
+                        break;
+
+                    if (bmp.GetPixel(next.X, next.Y) == borderColor)
+                    {
+                        pixels.Add(next);
+                        curr = next;
+                        currDir = nextDir;
+                        break;
+                    }
+                    moveTo = (moveTo + 1) % 8;
+                } while (moveTo != mt);
+            } while (next != start);
+
+            // меняем цвет грацицы
+            foreach (var p in pixels)
+                bmp.SetPixel(p.X, p.Y, c);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            DrawButtonIsPressed = false;
+            FillColorButtonIsPressed = false;
+            FillTextureButtonIsPressed = false;
+            FillBorderIsPressed = !FillBorderIsPressed;
+        }
     }
 
     class ConstantColor : IColorable
