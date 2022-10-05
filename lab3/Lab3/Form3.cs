@@ -69,13 +69,15 @@ namespace Lab3
         }
         private void CutTheTriangle(PaintEventArgs e)
         {
+
+            ArrangePoints();
             double incrementForX13 = 0;
             double incrementForX12 = 0;
             double incrementForX23 = 0;
             double currentX1 = points[0].X;
             double currentX2 = currentX1;
             
-            ArrangePoints();
+            //ArrangePoints();
             CalculateIncrements(ref incrementForX13, ref incrementForX12, ref incrementForX23);
 
             double _dx13 = incrementForX13;
@@ -177,6 +179,11 @@ namespace Lab3
                 
             }
             
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
