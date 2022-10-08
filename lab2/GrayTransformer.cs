@@ -70,7 +70,7 @@ namespace Lab2
                         double Y = 0.21 * color.R + 0.72 * color.G + 0.07 * color.B;
                         fastBitmap_hdtv[x, y] = Color.FromArgb((int)Y, (int)Y, (int)Y);
                     }
-
+                
             }
 
             graphics = pb_hdtv.CreateGraphics();
