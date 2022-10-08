@@ -86,9 +86,11 @@ namespace Lab3
                 Swap(ref incrementForX13, ref incrementForX12);
             }
             float t = 0.3f;
+            //int step = 1;
+            //int all_points = points[0].Y - points[1].Y + 1;
             for (int i = points[0].Y; i < points[1].Y; i++)
             {
-                
+               // t = step * 1.0f / all_points;
                 for (int j = (int)currentX1; j <= (int)currentX2; j++)
                 {
                     
@@ -182,6 +184,11 @@ namespace Lab3
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form3_Load(object sender, EventArgs e)
         {
 
         }
