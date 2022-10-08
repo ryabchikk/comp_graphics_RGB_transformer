@@ -388,6 +388,11 @@ namespace Lab3
             FillTextureButtonIsPressed = false;
             FillBorderIsPressed = !FillBorderIsPressed;
         }
+
+        private void pictureBox__t_1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     class ConstantColor : IColorable
