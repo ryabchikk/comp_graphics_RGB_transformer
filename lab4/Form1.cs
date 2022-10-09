@@ -18,7 +18,7 @@ namespace lab4
         private Bitmap bmp;
         private AffineTransformator affine;
         Point p;
-        
+        PointWorker pw;
         public Form1()
         {
             InitializeComponent();
@@ -30,8 +30,12 @@ namespace lab4
             pictureBox1.Image = bmp;
 
             g = Graphics.FromImage(pictureBox1.Image);
+            g.ScaleTransform(1.0F, -1.0F);
+            g.TranslateTransform(0.0F, -pb.Height);
 
             drawer = new PrimitiveDrawer(pb,g,bmp, primitivesRadioButtons);
+            pw = new PointWorker(pb, g, bmp, label1, label2,label3);
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -85,7 +89,7 @@ namespace lab4
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            
             int x = string.IsNullOrEmpty(textBox1.Text) ? 0 : int.Parse(textBox1.Text);
             int y = string.IsNullOrEmpty(textBox2.Text) ? 0 : int.Parse(textBox2.Text);
 
@@ -118,6 +122,33 @@ namespace lab4
                     affine.Rotate(angle,Point.Empty);
 
             }
+            
+
+            /* тест точки пересечения
+            Point p1 = new Point(30, 50);
+            Point p2 = new Point(30, 400);
+
+            Point p3 = new Point(20, 250);
+            Point p4 = new Point(20, 40);
+
+            g.DrawLine(Pens.Black, p1, p2);
+            g.DrawLine(Pens.Black, p3, p4);
+
+            pw.FindIntersection((p3, p4), (p2, p1));
+
+            pb.Invalidate();
+            */
+            
+            /* 
+             * тест расположение точки
+            Point p1 = new Point(30, 50);
+            Point p2 = new Point(330, 300);
+            Point p3 = new Point(350, 200);
+            g.DrawLine(Pens.Black, p1, p2);
+            g.FillEllipse(Brushes.Black, p3.X, p3.Y, 3, 3);
+            pw.PrintPointLocation((p1, p2), p3);
+            pb.Invalidate();
+            */
 
         }
 
