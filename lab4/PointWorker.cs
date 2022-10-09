@@ -32,9 +32,9 @@ namespace lab4
             return false;
         }
 
-        public void GetPointLocation()
+        public void GetPointLocation(List<Point> Line)
         {
-
+           
         }
 
     }
