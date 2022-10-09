@@ -36,17 +36,21 @@ namespace lab4
 
         private void DrawPoint(Point p)
         {
+            //нужно сохранять координаты точки 
+            // для передачи в PointWorker
 
         }
 
         private void DrawLine(Point p)
         {
-
+            // нужно сохранять координаты верхней и нижней точки ( точка с которой юзер рисует и точка в которой юзер заканчивает рисовать) 
+            // для передачи в PointWorker
         }
 
         private void DrawPolygon(Point p)
         {
-
+            // нужно сохранять координаты вершин полигона 
+            // для передачи в PointWorker
         }
 
         private int GetCheckedButton()

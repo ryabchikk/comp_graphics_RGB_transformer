@@ -25,6 +25,7 @@ namespace lab4
        
         public void Scale(int x,int y,Point p)
         {
+            // проверка, что  !p.IsEmpty
 
         }
 
@@ -35,7 +36,7 @@ namespace lab4
 
         public void Rotate(int angle, Point p)
         {
-
+            // проверка, что  !p.IsEmpty
         }
 
     }
