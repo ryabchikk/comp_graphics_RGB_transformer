@@ -33,8 +33,6 @@ namespace lab4
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.MoveRadioButton = new System.Windows.Forms.RadioButton();
@@ -45,15 +43,20 @@ namespace lab4
             this.LineRadioButton = new System.Windows.Forms.RadioButton();
             this.PolygonRadioButton = new System.Windows.Forms.RadioButton();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.RotateRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.Angle = new System.Windows.Forms.NumericUpDown();
+            this.numX = new System.Windows.Forms.NumericUpDown();
+            this.numY = new System.Windows.Forms.NumericUpDown();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Angle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -88,7 +91,6 @@ namespace lab4
             this.label2.TabIndex = 2;
             this.label2.Text = "Принадлежит полигону:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -99,22 +101,6 @@ namespace lab4
             this.label3.TabIndex = 3;
             this.label3.Text = "Положение точки:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(41, 123);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(37, 22);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(138, 123);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(37, 22);
-            this.textBox2.TabIndex = 5;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label4
             // 
@@ -221,14 +207,6 @@ namespace lab4
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(120, 160);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(37, 22);
-            this.textBox3.TabIndex = 16;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(39, 232);
@@ -253,9 +231,10 @@ namespace lab4
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.PolygonRadioButton);
-            this.groupBox1.Controls.Add(this.LineRadioButton);
+            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.groupBox1.Controls.Add(this.DotRadioButton);
+            this.groupBox1.Controls.Add(this.LineRadioButton);
+            this.groupBox1.Controls.Add(this.PolygonRadioButton);
             this.groupBox1.Location = new System.Drawing.Point(31, 11);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(209, 100);
@@ -266,23 +245,44 @@ namespace lab4
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.Angle);
+            this.groupBox2.Controls.Add(this.numX);
+            this.groupBox2.Controls.Add(this.numY);
             this.groupBox2.Controls.Add(this.button2);
             this.groupBox2.Controls.Add(this.RotateRadioButton);
-            this.groupBox2.Controls.Add(this.textBox3);
             this.groupBox2.Controls.Add(this.MoveRadioButton);
             this.groupBox2.Controls.Add(this.ScalingRadioButton);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.checkBox1);
             this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBox2);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.textBox1);
             this.groupBox2.Location = new System.Drawing.Point(31, 115);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(209, 328);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Функционал:";
+            // 
+            // Angle
+            // 
+            this.Angle.Location = new System.Drawing.Point(138, 163);
+            this.Angle.Name = "Angle";
+            this.Angle.Size = new System.Drawing.Size(55, 22);
+            this.Angle.TabIndex = 24;
+            // 
+            // numX
+            // 
+            this.numX.Location = new System.Drawing.Point(41, 123);
+            this.numX.Name = "numX";
+            this.numX.Size = new System.Drawing.Size(55, 22);
+            this.numX.TabIndex = 23;
+            // 
+            // numY
+            // 
+            this.numY.Location = new System.Drawing.Point(138, 123);
+            this.numY.Name = "numY";
+            this.numY.Size = new System.Drawing.Size(55, 22);
+            this.numY.TabIndex = 22;
             // 
             // groupBox3
             // 
@@ -315,6 +315,9 @@ namespace lab4
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Angle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -328,8 +331,6 @@ namespace lab4
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RadioButton MoveRadioButton;
@@ -340,12 +341,14 @@ namespace lab4
         private System.Windows.Forms.RadioButton LineRadioButton;
         private System.Windows.Forms.RadioButton PolygonRadioButton;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RadioButton RotateRadioButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.NumericUpDown Angle;
+        private System.Windows.Forms.NumericUpDown numX;
+        private System.Windows.Forms.NumericUpDown numY;
     }
 }
 

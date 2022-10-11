@@ -23,6 +23,8 @@ namespace lab4
         Point pointLocation;
         Point p;
         PointWorker pw;
+        Point up;
+        Point down;
         public Form1()
         {
             InitializeComponent();
@@ -47,7 +49,9 @@ namespace lab4
             pointLocation = new Point(0, 0);
             GroupBox GB1 = groupBox1; 
             GB1.Controls.Add(DotRadioButton);
+            groupBox1.Invalidate();
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -130,6 +134,8 @@ namespace lab4
                 if (endPoint == Point.Empty)
                     return;
                 segments.Add(new Segment(startPoint, endPoint));
+                up = startPoint;
+                down = endPoint;
                 startPoint = Point.Empty;
                 endPoint = Point.Empty;
 
@@ -148,6 +154,9 @@ namespace lab4
                 if (endPoint.Y > maxPolygonCoord.Y)
                     maxPolygonCoord.Y = endPoint.Y;
 
+
+                up = startPoint;
+                down = endPoint;
                 startPoint = endPoint;
                 endPoint = Point.Empty;
             }
@@ -155,6 +164,7 @@ namespace lab4
             else if (DotRadioButton.Checked)
             {
                 pointLocation = e.Location;
+                up = e.Location;
             }
             pictureBox1.Invalidate();
         }
@@ -195,44 +205,113 @@ namespace lab4
             
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            /*
-            int x = string.IsNullOrEmpty(textBox1.Text) ? 0 : int.Parse(textBox1.Text);
-            int y = string.IsNullOrEmpty(textBox2.Text) ? 0 : int.Parse(textBox2.Text);
+
 
             if (MoveRadioButton.Checked)
             {
-                affine.Move(x, y);
-                return;
+                int x = (int)numX.Value;
+                int y = (int)numY.Value;
+                Back_coord(x, y);
+                pictureBox1.Invalidate();
             }
 
             if (ScalingRadioButton.Checked)
             {
-               
+                double x = (double)numX.Value / 100;
+                double y = (double)numY.Value / 100;
+                //матрица сжатия/растяжения
+                Matrix M = new Matrix(3, 3);
+                M[0, 2] = 0;
+                M[1, 2] = 0;
+                M[2, 2] = 1;
+                M[0, 0] = x;
+                M[1, 1] = y;
+                M[0, 1] = 0;
+                M[1, 0] = 0;
+                M[2, 0] = 0;
+                M[2, 1] = 0;
+
+                //точка, относительно которой масштабировать
+                PointF translationPoint;
+
+                //вокруг точки
                 if (checkBox1.Checked)
                 {
-                    affine.Scale(x, y,p);
-                    return;
-                } else
-                    affine.Scale(x, y, Point.Empty);
+                    if (pointLocation == Point.Empty)
+                        return;
+                    translationPoint = pointLocation;
+                }
+                //вокруг центра
+                else
+                    translationPoint = new PointF((minPolygonCoord.X + maxPolygonCoord.X) / 2, (minPolygonCoord.Y + maxPolygonCoord.Y) / 2);
+
+                for (int i = 0; i < polygon.Count; ++i)
+                {
+                    //перенос в начало координат
+                    Back_coord(-1 * translationPoint.X, -1 * translationPoint.Y);
+                    //масштабирование
+                    Matrix vec = new Matrix(1, 3);
+                    vec[0, 0] = polygon[i].X;
+                    vec[0, 1] = polygon[i].Y;
+                    vec[0, 2] = 1;
+                    vec *= M;
+                    polygon[i] = new Point((int)vec[0, 0], (int)vec[0, 1]);
+                    //перенос обратно
+                    Back_coord(translationPoint.X, translationPoint.Y);
+                }
             }
 
             if (RotateRadioButton.Checked)
             {
-               int angle = string.IsNullOrEmpty(textBox3.Text) ? 0 : int.Parse(textBox3.Text);
-                if (checkBox1.Checked)
+                double angle = (double)Angle.Value;
+                //матрица сжатия/растяжения
+                Matrix M = new Matrix(3, 3);
+                M[0, 2] = 0;
+                M[1, 2] = 0;
+                M[2, 2] = 1;
+                M[0, 0] = Math.Cos(angle * Math.PI / 180);
+                M[0, 1] = Math.Sin(angle * Math.PI / 180);
+                M[1, 0] = -Math.Sin(angle * Math.PI / 180);
+                M[1, 1] = Math.Cos(angle * Math.PI / 180);
+                M[2, 0] = 0;
+                M[2, 1] = 0;
+
+                for (int i = 0; i < polygon.Count; ++i)
                 {
-                    affine.Rotate(angle, p);
-                    return;
+                    //точка, относительно которой масштабировать
+                    PointF translationPoint;
+
+                    //вокруг заданной точки
+                    if (checkBox1.Checked)
+                    {
+                        if (pointLocation == Point.Empty)
+                            return;
+                        translationPoint = pointLocation;
+                    }
+                    //вокруг центра
+                    else
+                        translationPoint = new PointF((minPolygonCoord.X + maxPolygonCoord.X) / 2, (minPolygonCoord.Y + maxPolygonCoord.Y) / 2);
+
+
+                    //перенос в начало координат
+                    Back_coord(-1 * translationPoint.X, -1 * translationPoint.Y);
+                    //масштабирование
+                    Matrix vec = new Matrix(1, 3);
+                    vec[0, 0] = polygon[i].X;
+                    vec[0, 1] = polygon[i].Y;
+                    vec[0, 2] = 1;
+                    vec *= M;
+                    polygon[i] = new Point((int)vec[0, 0], (int)vec[0, 1]);
+                    //перенос обратно
+                    Back_coord(translationPoint.X, translationPoint.Y);
+
+                    pictureBox1.Invalidate();
+
                 }
-                else
-                    affine.Rotate(angle,Point.Empty);
+
 
             }
 
@@ -287,6 +366,55 @@ namespace lab4
 
         }
 
+        private void Back_coord(double dx, double dy)
+        {
+            //матрица переноса
+            Matrix M = new Matrix(3, 3);
+            M[0, 2] = 0;
+            M[1, 2] = 0;
+            M[2, 2] = 1;
+            M[0, 0] = 1;
+            M[0, 1] = 0;
+            M[1, 0] = 0;
+            M[1, 1] = 1;
+            M[2, 0] = dx;
+            M[2, 1] = dy;
+            if (LineRadioButton.Checked)
+            {
+                for (int i = 0; i < segments.Count; ++i)
+                {
+                    Matrix vec = new Matrix(1, 3);
+                    vec[0, 0] = segments[i].leftP.X;
+                    vec[0, 1] = segments[i].leftP.Y;
+                    vec[0, 2] = 1;
+                    vec *= M;
+                    Point leftP = new Point((int)vec[0, 0], (int)vec[0, 1]);
+                    vec[0, 0] = segments[i].rightP.X;
+                    vec[0, 1] = segments[i].rightP.Y;
+                    vec[0, 2] = 1;
+                    vec *= M;
+                    Point rightP = new Point((int)vec[0, 0], (int)vec[0, 1]);
+                    segments[i] = new Segment(leftP, rightP);
+                }
+            }
+            else if (PolygonRadioButton.Checked)
+            {
+                for (int i = 0; i < polygon.Count; ++i)
+                {
+                    Matrix vec = new Matrix(1, 3);
+                    vec[0, 0] = polygon[i].X;
+                    vec[0, 1] = polygon[i].Y;
+                    vec[0, 2] = 1;
+                    vec *= M;
+                    polygon[i] = new Point((int)vec[0, 0], (int)vec[0, 1]);
+                }
+            }
+        }
+
+        int find_where_the_point_is(PointF p, Point A, Point B)
+        {
+            return (int)((p.X - A.X) * (B.Y - A.Y) - (p.Y - A.Y) * (B.X - A.X));
+        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -306,5 +434,69 @@ namespace lab4
         public Segment() { leftP = new Point(); rightP = new Point(); }
 
         public Segment(Point l, Point r) { leftP = l; rightP = r; }
+    }
+
+    class Matrix
+    {
+        private double[,] data;
+
+        private int m;
+        public int M { get => this.m; }
+
+        private int n;
+        public int N { get => this.n; }
+
+        public Matrix(int m, int n)
+        {
+            this.m = m;
+            this.n = n;
+            this.data = new double[m, n];
+        }
+        public void ProcessFunctionOverData(Action<int, int> func)
+        {
+            for (var i = 0; i < this.M; i++)
+            {
+                for (var j = 0; j < this.N; j++)
+                {
+                    func(i, j);
+                }
+            }
+        }
+
+        public double this[int x, int y]
+        {
+            get
+            {
+                return this.data[x, y];
+            }
+            set
+            {
+                this.data[x, y] = value;
+            }
+        }
+
+        public static Matrix operator *(Matrix matrix, double value)
+        {
+            var result = new Matrix(matrix.M, matrix.N);
+            result.ProcessFunctionOverData((i, j) =>
+                result[i, j] = matrix[i, j] * value);
+            return result;
+        }
+
+        public static Matrix operator *(Matrix matrix, Matrix matrix2)
+        {
+            if (matrix.N != matrix2.M)
+            {
+                throw new ArgumentException("matrixes can not be multiplied");
+            }
+            var result = new Matrix(matrix.M, matrix2.N);
+            result.ProcessFunctionOverData((i, j) => {
+                for (var k = 0; k < matrix.N; k++)
+                {
+                    result[i, j] += matrix[i, k] * matrix2[k, j];
+                }
+            });
+            return result;
+        }
     }
 }
