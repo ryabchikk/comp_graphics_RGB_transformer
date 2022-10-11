@@ -38,9 +38,10 @@ namespace lab4
             g = Graphics.FromImage(pictureBox1.Image);
             g.ScaleTransform(1.0F, -1.0F);
             g.TranslateTransform(0.0F, -pb.Height);
-
+            
             drawer = new PrimitiveDrawer(pb,g,bmp, primitivesRadioButtons);
             pw = new PointWorker(pb, g, bmp, label1, label2,label3);
+           
 
             g.Clear(Color.White);
             LineRadioButton.Checked = true;
@@ -202,7 +203,20 @@ namespace lab4
 
             pictureBox1.Invalidate();
             //подключить обновление состояний Антона
+            if (!pointLocation.IsEmpty && !up.IsEmpty && !down.IsEmpty)
+            {
+                pw.PrintPointLocation((down, up),pointLocation);
+            }
             
+            if(segments.Count >= 2)
+            {
+                pw.FindIntersection(segments[segments.Count - 2].GetPoints(), segments[segments.Count - 1].GetPoints());
+            }
+
+            if(!pointLocation.IsEmpty && polygon.Count > 2)
+            {
+                pw.PrintPointIsInPolygon(pointLocation,polygon);
+            }
         }
 
 
@@ -315,7 +329,6 @@ namespace lab4
 
             }
 
-            */
             /*
            //тест точки пересечения
             Point p1 = new Point(30, 50);
@@ -411,6 +424,21 @@ namespace lab4
             }
         }
 
+        private void DotRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
         int find_where_the_point_is(PointF p, Point A, Point B)
         {
             return (int)((p.X - A.X) * (B.Y - A.Y) - (p.Y - A.Y) * (B.X - A.X));
@@ -434,6 +462,11 @@ namespace lab4
         public Segment() { leftP = new Point(); rightP = new Point(); }
 
         public Segment(Point l, Point r) { leftP = l; rightP = r; }
+
+        public (Point,Point) GetPoints()
+        {
+            return (leftP, rightP);
+        }
     }
 
     class Matrix
