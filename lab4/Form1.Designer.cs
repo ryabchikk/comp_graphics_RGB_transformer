@@ -174,6 +174,7 @@ namespace lab4
             this.DotRadioButton.TabStop = true;
             this.DotRadioButton.Text = "Точку";
             this.DotRadioButton.UseVisualStyleBackColor = true;
+            this.DotRadioButton.CheckedChanged += new System.EventHandler(this.DotRadioButton_CheckedChanged);
             // 
             // LineRadioButton
             // 
@@ -241,6 +242,7 @@ namespace lab4
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Нарисовать:";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
             // 
@@ -294,6 +296,7 @@ namespace lab4
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Инфо:";
+            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
             // 
             // Form1
             // 

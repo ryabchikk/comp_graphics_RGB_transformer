@@ -23,9 +23,9 @@ namespace lab4
             g = _g;
             bmp = _bmp;
             pb = _Pb;
-            pointPerEdge = l;
-            intersectionPoint = l1;
-            PolygonPoint = l2;
+            pointPerEdge = l2;
+            intersectionPoint = l;
+            PolygonPoint = l1;
         }
 
         private Point GetVector((Point f, Point s) line)
@@ -75,6 +75,12 @@ namespace lab4
             }
             else
                 intersectionPoint.Text = "Точка пересечения: не существует";
+        }
+
+        public void PrintPointIsInPolygon(Point userPoint, List<Point> Polygon)
+        {
+  
+            PolygonPoint.Text = "Принадлежит полигону:" + (IsInPolygon(userPoint, Polygon)? "Da" : "Net");
         }
 
         public bool IsInPolygon(Point userPoint,List<Point> Polygon)
