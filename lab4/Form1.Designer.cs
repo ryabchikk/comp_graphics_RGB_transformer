@@ -50,14 +50,12 @@ namespace lab4
             this.Angle = new System.Windows.Forms.NumericUpDown();
             this.numX = new System.Windows.Forms.NumericUpDown();
             this.numY = new System.Windows.Forms.NumericUpDown();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Angle)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).BeginInit();
-            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -76,7 +74,7 @@ namespace lab4
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 475);
+            this.label1.Location = new System.Drawing.Point(28, 463);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(143, 17);
             this.label1.TabIndex = 1;
@@ -85,7 +83,7 @@ namespace lab4
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 59);
+            this.label2.Location = new System.Drawing.Point(28, 494);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(166, 17);
             this.label2.TabIndex = 2;
@@ -95,7 +93,7 @@ namespace lab4
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(46, 539);
+            this.label3.Location = new System.Drawing.Point(28, 528);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(129, 17);
             this.label3.TabIndex = 3;
@@ -286,30 +284,18 @@ namespace lab4
             this.numY.Size = new System.Drawing.Size(55, 22);
             this.numY.TabIndex = 22;
             // 
-            // groupBox3
-            // 
-            this.groupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox3.Controls.Add(this.label2);
-            this.groupBox3.Location = new System.Drawing.Point(31, 445);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(209, 116);
-            this.groupBox3.TabIndex = 21;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Инфо:";
-            this.groupBox3.Enter += new System.EventHandler(this.groupBox3_Enter);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1053, 571);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox3);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -321,8 +307,6 @@ namespace lab4
             ((System.ComponentModel.ISupportInitialize)(this.Angle)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numX)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numY)).EndInit();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,7 +332,6 @@ namespace lab4
         private System.Windows.Forms.RadioButton RotateRadioButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.NumericUpDown Angle;
         private System.Windows.Forms.NumericUpDown numX;
         private System.Windows.Forms.NumericUpDown numY;

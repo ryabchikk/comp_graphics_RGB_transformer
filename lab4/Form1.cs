@@ -25,6 +25,7 @@ namespace lab4
         PointWorker pw;
         Point up;
         Point down;
+        bool isMouse;
         public Form1()
         {
             InitializeComponent();
@@ -36,8 +37,8 @@ namespace lab4
             pictureBox1.Image = bmp;
 
             g = Graphics.FromImage(pictureBox1.Image);
-            g.ScaleTransform(1.0F, -1.0F);
-            g.TranslateTransform(0.0F, -pb.Height);
+          //  g.ScaleTransform(1.0F, -1.0F);
+          //  g.TranslateTransform(0.0F, -pb.Height);
             
             drawer = new PrimitiveDrawer(pb,g,bmp, primitivesRadioButtons);
             pw = new PointWorker(pb, g, bmp, label1, label2,label3);
@@ -84,12 +85,20 @@ namespace lab4
         {
             g = Graphics.FromImage(pictureBox1.Image);
             g.Clear(Color.White);
-            g.ScaleTransform(1.0F, -1.0F);
-            g.TranslateTransform(0.0F, -pb.Height);
+           // g.ScaleTransform(1.0F, -1.0F);
+           // g.TranslateTransform(0.0F, -pb.Height);
             segments.Clear();
             polygon.Clear();
             pointLocation = Point.Empty;
             pictureBox1.Invalidate();
+            label2.Text = "Принадлежит полигону:";
+            label1.Text = "Точка пересечения:";
+            label3.Text = "Положение точки:";
+          //  groupBox1.Refresh();
+           // label3.Refresh();
+            //label2.Refresh();
+            //label1.Refresh();
+
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -102,7 +111,7 @@ namespace lab4
             if (IsDrawing())
             {
                 startPoint = e.Location;
-
+                isMouse = true;
                 if (PolygonRadioButton.Checked && polygon.Count == 0)
                 {
                     minPolygonCoord = e.Location;
@@ -130,6 +139,7 @@ namespace lab4
 
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            isMouse = false;
             if (LineRadioButton.Checked && IsDrawing())
             {
                 if (endPoint == Point.Empty)
@@ -142,7 +152,7 @@ namespace lab4
 
             }
             else if (PolygonRadioButton.Checked && IsDrawing())
-            {
+            {   
                 if (endPoint == Point.Empty)
                     return;
                 polygon.Add(endPoint);
@@ -160,12 +170,13 @@ namespace lab4
                 down = endPoint;
                 startPoint = endPoint;
                 endPoint = Point.Empty;
+                
             }
 
             else if (DotRadioButton.Checked)
             {
                 pointLocation = e.Location;
-                up = e.Location;
+                //up = e.Location;
             }
             pictureBox1.Invalidate();
         }
@@ -174,7 +185,7 @@ namespace lab4
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         { 
-            
+           
             pictureBox1.Image = bmp;
             g = Graphics.FromImage(pictureBox1.Image);
             g.Clear(Color.White);
@@ -194,10 +205,16 @@ namespace lab4
                 pictureBox1.Invalidate();
 
             }
+
+          
+
             //пока тянешь ребро
-            if (startPoint != Point.Empty && endPoint != Point.Empty)
+            if ((isMouse && !DotRadioButton.Checked && startPoint != Point.Empty && endPoint != Point.Empty))
                 g.DrawLine(Pens.Red, startPoint, endPoint);
             //точка
+           
+          
+
             g.DrawEllipse(Pens.Blue, pointLocation.X - 1, pointLocation.Y - 1, 3, 3);
             g.FillEllipse(Brushes.Blue, pointLocation.X - 1, pointLocation.Y - 1, 3, 3);
 
@@ -206,24 +223,31 @@ namespace lab4
             if (!pointLocation.IsEmpty && !up.IsEmpty && !down.IsEmpty)
             {
                 pw.PrintPointLocation((down, up),pointLocation);
+                label3.Refresh();
             }
             
             if(segments.Count >= 2)
             {
                 pw.FindIntersection(segments[segments.Count - 2].GetPoints(), segments[segments.Count - 1].GetPoints());
+                label1.Refresh();
             }
-
-            if(!pointLocation.IsEmpty && polygon.Count > 2)
+           
+         
+            if (!pointLocation.IsEmpty && polygon.Count > 2)
             {
-                pw.PrintPointIsInPolygon(pointLocation,polygon);
+
+                label2.Text = "Принадлежит полигону:" + (pw.IsInPolygon(pointLocation, polygon) ? "Da" : "Net");
+                label2.Refresh();
             }
+            pictureBox1.Invalidate();
         }
 
+       
 
         private void button2_Click(object sender, EventArgs e)
         {
 
-
+            
             if (MoveRadioButton.Checked)
             {
                 int x = (int)numX.Value;
@@ -328,14 +352,14 @@ namespace lab4
 
 
             }
-
+            
             /*
            //тест точки пересечения
             Point p1 = new Point(30, 50);
             Point p2 = new Point(30, 400);
 
-            Point p3 = new Point(20, 250);
-            Point p4 = new Point(120, 40);
+            Point p3 = new Point(40, 250);
+            Point p4 = new Point(90, 250);
 
             g.DrawLine(Pens.Black, p1, p2);
             g.DrawLine(Pens.Black, p3, p4);
@@ -343,9 +367,9 @@ namespace lab4
             pw.FindIntersection((p3, p4), (p2, p1));
 
             pb.Invalidate();
-             */            
+              */           
 
-            /* 
+             /*
              * тест расположение точки
             Point p1 = new Point(30, 50);
             Point p2 = new Point(330, 300);
@@ -371,12 +395,12 @@ namespace lab4
             lst.Add(p3);
             lst.Add(p4);
 
-            g.FillEllipse(Brushes.Black, 370, 330, 3, 3);
-            pw.FindIntersection((p1, p4), (new Point(371, 330), new Point(571, 330)));
+            g.FillEllipse(Brushes.Black, 570, 330, 3, 3);
+           // pw.FindIntersection((p1, p4), (new Point(371, 330), new Point(571, 330)));
             pb.Invalidate();
-          //  label2.Text = "Принадлежит полигону:" + (pw.IsInPolygon(new Point(370, 330), lst) ? "Da" : "Net");
+            label2.Text = "Принадлежит полигону:" + (pw.IsInPolygon(new Point(570, 330), lst) ? "Da" : "Net");
              */
-
+            
         }
 
         private void Back_coord(double dx, double dy)
@@ -439,10 +463,7 @@ namespace lab4
 
         }
 
-        int find_where_the_point_is(PointF p, Point A, Point B)
-        {
-            return (int)((p.X - A.X) * (B.Y - A.Y) - (p.Y - A.Y) * (B.X - A.X));
-        }
+     
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
