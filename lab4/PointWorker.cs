@@ -45,24 +45,33 @@ namespace lab4
         
         private PointF GetIntersectionPoint((Point f, Point s) first, (Point f, Point s) second)
         {
-            Point dc = GetVector(second); //E = B-A = ( Bx-Ax, By-Ay ) 
-            Point ba = GetVector(first);  // F = D-C = ( Dx-Cx, Dy-Cy ) 
-            Point n = new Point(-dc.Y, dc.X); // P = ( -Ey, Ex )
-            int div = GetScalarMult(n, ba); // 
+            //second - cd ; first = ab
+            Point dc = GetVector(second); 
+            Point ba = GetVector(first);  
+            Point n = new Point(-dc.Y, dc.X); 
+        
+            int div = GetScalarMult(n, ba); 
             if (div != 0)
             {
                 Point ac = new Point(first.f.X - second.f.X, first.f.Y - second.f.Y);
 
-                float t = -1*GetScalarMult(n, ac) * 1.0f / div; //h = ( (A-C) * P ) / ( F * P ) 
-                if (t >= 0 && t <= 1)
+                float t = -1*GetScalarMult(n, ac) * 1.0f / div; 
+                Point k = new Point(-ba.Y, ba.X);
+
+                float u = -1*GetScalarMult(k, ac) * 1.0f / div;
+
+                if (u>=0 && u< 1 && t >= 0 && t <= 1)
                 {
                     PointF intersection = new PointF(((first.s.X - first.f.X) * t + first.f.X), (t * (first.s.Y - first.f.Y) + first.f.Y));
                     return intersection;
                 }
             }
-           
-                return PointF.Empty;
-        }
+            
+
+
+
+            return PointF.Empty;
+        } 
 
         public void FindIntersection((Point f,Point s) first, (Point f, Point s) second)
         {
@@ -79,8 +88,8 @@ namespace lab4
 
         public void PrintPointIsInPolygon(Point userPoint, List<Point> Polygon)
         {
-  
-            PolygonPoint.Text = "Принадлежит полигону:" + (IsInPolygon(userPoint, Polygon)? "Da" : "Net");
+            PolygonPoint.Text = "fuuck";
+            //PolygonPoint.Text = "Принадлежит полигону:" + (IsInPolygon(userPoint, Polygon) ? "Da" : "Net");
         }
 
         public bool IsInPolygon(Point userPoint,List<Point> Polygon)
