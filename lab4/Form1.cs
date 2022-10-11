@@ -17,6 +17,10 @@ namespace lab4
         private Graphics g;
         private Bitmap bmp;
         private AffineTransformator affine;
+        List<Segment> segments = new List<Segment>();
+        List<Point> polygon = new List<Point>();
+        Point startPoint, endPoint, minPolygonCoord, maxPolygonCoord;
+        Point pointLocation;
         Point p;
         PointWorker pw;
         public Form1()
@@ -35,7 +39,14 @@ namespace lab4
 
             drawer = new PrimitiveDrawer(pb,g,bmp, primitivesRadioButtons);
             pw = new PointWorker(pb, g, bmp, label1, label2,label3);
-            
+
+            g.Clear(Color.White);
+            LineRadioButton.Checked = true;
+            startPoint = Point.Empty;
+            endPoint = Point.Empty;
+            pointLocation = new Point(0, 0);
+            GroupBox GB1 = groupBox1; 
+            GB1.Controls.Add(DotRadioButton);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -66,26 +77,124 @@ namespace lab4
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            g = Graphics.FromImage(pictureBox1.Image);
+            g.Clear(Color.White);
+            segments.Clear();
+            polygon.Clear();
+            pointLocation = Point.Empty;
+            pictureBox1.Invalidate();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             
         }
-
+            
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             if (IsDrawing())
             {
-                drawer.Draw(e.Location);
+                startPoint = e.Location;
+
+                if (PolygonRadioButton.Checked && polygon.Count == 0)
+                {
+                    minPolygonCoord = e.Location;
+                    maxPolygonCoord = e.Location;
+                    polygon.Add(startPoint);
+                }
             }
             else
                 p = e.Location;
            
         }
 
+        private void PictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (LineRadioButton.Checked && IsDrawing())
+            {
+                endPoint = e.Location;
+            }
+            else if (PolygonRadioButton.Checked && IsDrawing())
+            {
+                endPoint = e.Location;
+            }
+            pictureBox1.Invalidate();
+        }
+
+        private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (LineRadioButton.Checked && IsDrawing())
+            {
+                if (endPoint == Point.Empty)
+                    return;
+                segments.Add(new Segment(startPoint, endPoint));
+                startPoint = Point.Empty;
+                endPoint = Point.Empty;
+
+            }
+            else if (PolygonRadioButton.Checked && IsDrawing())
+            {
+                if (endPoint == Point.Empty)
+                    return;
+                polygon.Add(endPoint);
+                if (endPoint.X < minPolygonCoord.X)
+                    minPolygonCoord.X = endPoint.X;
+                if (endPoint.Y < minPolygonCoord.Y)
+                    minPolygonCoord.Y = endPoint.Y;
+                if (endPoint.X > maxPolygonCoord.X)
+                    maxPolygonCoord.X = endPoint.X;
+                if (endPoint.Y > maxPolygonCoord.Y)
+                    maxPolygonCoord.Y = endPoint.Y;
+
+                startPoint = endPoint;
+                endPoint = Point.Empty;
+            }
+
+            else if (DotRadioButton.Checked)
+            {
+                pointLocation = e.Location;
+            }
+            pictureBox1.Invalidate();
+        }
+
         private bool IsDrawing() => DotRadioButton.Checked || LineRadioButton.Checked || PolygonRadioButton.Checked;
+
+        private void PictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            pictureBox1.Image = bmp;
+            g = Graphics.FromImage(pictureBox1.Image);
+            g.Clear(Color.White);
+            if (segments.Count > 0)
+            {
+                foreach (Segment seg in segments)
+                    g.DrawLine(Pens.Red, seg.leftP, seg.rightP);
+            }
+
+            if (polygon.Count > 1)
+            {
+                for (int i = 0; i < polygon.Count - 1; ++i)
+                {
+                    g.DrawLine(Pens.Red, polygon[i], polygon[i + 1]);
+                }
+                g.DrawLine(Pens.Red, polygon[0], polygon[polygon.Count - 1]);
+                pictureBox1.Invalidate();
+
+            }
+            //пока тянешь ребро
+            if (startPoint != Point.Empty && endPoint != Point.Empty)
+                g.DrawLine(Pens.Red, startPoint, endPoint);
+            //точка
+            g.DrawEllipse(Pens.Blue, pointLocation.X - 1, pointLocation.Y - 1, 3, 3);
+            g.FillEllipse(Brushes.Blue, pointLocation.X - 1, pointLocation.Y - 1, 3, 3);
+
+            pictureBox1.Invalidate();
+            //подключить обновление состояний Антона
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -162,5 +271,14 @@ namespace lab4
         {
 
         }
+    }
+
+    class Segment
+    {
+        public Point leftP, rightP;
+
+        public Segment() { leftP = new Point(); rightP = new Point(); }
+
+        public Segment(Point l, Point r) { leftP = l; rightP = r; }
     }
 }
