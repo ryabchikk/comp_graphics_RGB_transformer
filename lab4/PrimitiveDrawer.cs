@@ -30,7 +30,7 @@ namespace lab4
                 case 1: {DrawPoint(p); break; }
                 case 2: { DrawLine(p);break; }
                 case 3: { DrawPolygon(p); break; }
-
+                
             }
         }
 
