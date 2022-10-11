@@ -79,6 +79,7 @@ namespace Lab3
             this.pictureBox__t_1.Size = new System.Drawing.Size(610, 558);
             this.pictureBox__t_1.TabIndex = 3;
             this.pictureBox__t_1.TabStop = false;
+            this.pictureBox__t_1.Click += new System.EventHandler(this.pictureBox__t_1_Click);
             this.pictureBox__t_1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox__t_1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox__t_1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
