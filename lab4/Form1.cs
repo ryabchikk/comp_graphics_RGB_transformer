@@ -163,7 +163,7 @@ namespace lab4
 
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         { 
-            /*
+            
             pictureBox1.Image = bmp;
             g = Graphics.FromImage(pictureBox1.Image);
             g.Clear(Color.White);
@@ -192,7 +192,7 @@ namespace lab4
 
             pictureBox1.Invalidate();
             //подключить обновление состояний Антона
-            */
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -263,7 +263,7 @@ namespace lab4
             pw.PrintPointLocation((p1, p2), p3);
             pb.Invalidate();
             */
-            
+            /*
             List<Point> lst = new List<Point>();
             Point p1 = new Point(30, 50);
             Point p2 = new Point(330, 300);
@@ -283,7 +283,7 @@ namespace lab4
             pw.FindIntersection((p1, p4), (new Point(371, 330), new Point(571, 330)));
             pb.Invalidate();
           //  label2.Text = "Принадлежит полигону:" + (pw.IsInPolygon(new Point(370, 330), lst) ? "Da" : "Net");
-             
+             */
 
         }
 
