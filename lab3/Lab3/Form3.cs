@@ -13,142 +13,160 @@ namespace Lab3
     public partial class Form3 : Form
     {
         Point[] points = new Point[3];
+
+        int step, steps;
         int CounterSetPoint;
+        int deltaX, deltaY;
+        int signX, signY;
+        int e1, e2;
+        
         Bitmap bmp;
         PictureBox pbox;
-        private void Swap<T>(ref T a, ref T b)
-        {
-            T temp = a;
-            a = b;
-            b = temp;
-        }
+        Dictionary<int, GradientColors> dictionary = new Dictionary<int, GradientColors>();
 
-        private void ArrangePoints()
+        private class GradientColors
         {
+            public int leftX;
+            public int rightX;
+            public Color leftColor;
+            public Color rightColor;
 
-            if (points[1].Y < points[0].Y) {
-                Swap(ref points[1], ref points[0]);
-            }
-            if (points[2].Y < points[0].Y) {
-                Swap(ref points[2], ref points[0]);
-            }
-            if (points[1].Y > points[2].Y) {
-                Swap(ref points[1], ref points[2]);
+            public GradientColors(int leftX, int rightX, Color leftColor, Color rightColor)
+            {
+                this.leftX = leftX;
+                this.rightX = rightX;
+                this.leftColor = leftColor;
+                this.rightColor = rightColor;
             }
         }
-        private void CalculateIncrements(ref double dx13,ref double dx12,ref double dx23)
+        private Color LerpRGB(Color color1, Color color2)
         {
-            if (points[2].Y != points[0].Y) {
-                dx13 = points[2].X - points[0].X;
-                dx13 /= points[2].Y - points[0].Y;
-            }
-            else {
-                dx13 = 0;
-            }
-
-            if (points[1].Y != points[0].Y) {
-                dx12 = points[1].X - points[0].X;
-                dx12 /= points[1].Y -points[0].Y;
-            }
-            else {
-                dx12 = 0;
-            }
-
-            if (points[2].Y != points[1].Y) {
-                dx23 = points[2].X - points[1].X;
-                dx23 /= points[2].Y - points[1].Y;
-            }
-            else {
-                dx23 = 0;
-            }
+            return Color.FromArgb(CalculateParametrColor(color1.R,color2.R), CalculateParametrColor(color1.G, color2.G), CalculateParametrColor(color1.B, color2.B));
         }
-        public static Color LerpRGB(Color a, Color b, float t)
+        
+        private int CalculateParametrColor(int parametrColor1,int parametrColor2)
         {
-            Color colorRes = Color.FromArgb(Math.Abs((int)(a.A + (b.A - a.A) * t) % 256), Math.Abs((int)(a.R + (b.R - a.R) * t) % 256), Math.Abs((int)(a.G + (b.G - a.G) * t)%256), Math.Abs((int)(a.B + (b.B - a.B) * t) % 256));
-            return colorRes;
+            return parametrColor1 + (parametrColor2 - parametrColor1) * step / steps;
         }
-        private void CutTheTriangle(PaintEventArgs e)
+        private int CalculateDelta(int a, int b) => Math.Abs(b - a);
+        private int CalculateSign(int a, int b) => a < b ? 1 : -1;
+        private int CalculateCountSteps(Point point1, Point point2) 
         {
-
-            ArrangePoints();
-            double incrementForX13 = 0;
-            double incrementForX12 = 0;
-            double incrementForX23 = 0;
-            double currentX1 = points[0].X;
-            double currentX2 = currentX1;
+            int result = 0;         
             
-            //ArrangePoints();
-            CalculateIncrements(ref incrementForX13, ref incrementForX12, ref incrementForX23);
+            
+            Point pointForWork = point1;
 
-            double _dx13 = incrementForX13;
-            if (incrementForX13 > incrementForX12)
+            signX = CalculateSign(point1.X, point2.X);
+            signY = CalculateSign(point1.Y, point2.Y);
+            
+            deltaX = CalculateDelta(point1.X, point2.X);
+            deltaY = CalculateDelta(point1.Y, point2.Y);
+            
+            e1 = (deltaX > deltaY ? deltaX : -deltaY) / 2;
+            
+            while (pointForWork.X!=point2.X || pointForWork.Y!=point2.Y) 
             {
-                Swap(ref incrementForX13, ref incrementForX12);
-            }
-            float t = 0.3f;
-            //int step = 1;
-            //int all_points = points[0].Y - points[1].Y + 1;
-            for (int i = points[0].Y; i < points[1].Y; i++)
-            {
-               // t = step * 1.0f / all_points;
-                for (int j = (int)currentX1; j <= (int)currentX2; j++)
+                result++;
+                e2 = e1;
+                if (e2 > -deltaX)
                 {
-                    
-                    Graphics g = e.Graphics;
-                    Color red1 = ((Bitmap)pictureBox1.Image).GetPixel(1, 1);
-                    Color red = LerpRGB(Color.Red,Color.Black , t);
-                    SolidBrush myBrush = new SolidBrush(red);
-                    g.FillRectangle(myBrush, j, i, 1, 1);
-                    t += 0.00005f;
+                    e1 -= deltaY;
+                    pointForWork.X += signX;
                 }
-                currentX1 += incrementForX13;
-                currentX2 += incrementForX12;
-            }
-            if (points[0].Y == points[1].Y)
-            {
-                currentX1 = points[0].X;
-                currentX2 = points[1].X;
-            }
-            if (_dx13 < incrementForX23)
-            {
-                Swap(ref _dx13, ref incrementForX23);
-            }
-            for (int i = points[1].Y; i <= points[2].Y; i++)
-            {
-                for (int j = (int)currentX1; j <= (int)currentX2; j++)
+                if (e2 < deltaY)
                 {
-                    Graphics g = e.Graphics;
-                    Color red = LerpRGB(Color.Red, Color.Black, t);
-                    SolidBrush myBrush = new SolidBrush(red);
-                    g.FillRectangle(myBrush, j, i, 1, 1);
-                    t += 0.00005f;
+                    e1 += deltaX;
+                    pointForWork.Y += signY;
                 }
-                currentX1 += _dx13;
-                currentX2 += incrementForX23;
             }
+
+            return result;
         }
-        public void DrawPathGradentWthoutGraphicsPath(PaintEventArgs e)
+        
+        private void DrawBordersGradient(Point point1, Point point2, Color color1, Color color2, Dictionary<int, GradientColors> dict)
         {
-            // Construct a path gradient brush based on an array of points.
-            PointF[] ptsF = { points[0], points[1], points[2] };
+            step = 0;
+            steps = CalculateCountSteps(point1, point2);
 
-            PathGradientBrush pBrush = new PathGradientBrush(ptsF);
+            while (point1.X != point2.X || point1.Y != point2.Y)
+            {
+                Color colorForWork = LerpRGB(color1,color2);
+                if (dict.ContainsKey(point1.Y)) {
+                    
+                    if (dict[point1.Y].leftX > point1.X) {
+                        dict[point1.Y].leftX = point1.X;
+                        dict[point1.Y].leftColor = colorForWork;
+                    }
+                    if (dict[point1.Y].rightX < point1.X) {
+                        dict[point1.Y].rightX = point1.X;
+                        dict[point1.Y].rightColor = colorForWork;
+                    }
 
-            // An array of five points was used to construct the path gradient
-            // brush. Set the color of each point in that array.
-            Color[] colors = {
-       Color.FromArgb(255, 255, 0, 0),  // (0, 0) red
-       Color.FromArgb(255, 0, 255, 0),  // (160, 0) green
-       Color.FromArgb(255, 0, 0, 255) };  // (80, 150) blue
+                }
+                else
+                    dict.Add(point1.Y, new GradientColors(point1.X, point1.X, colorForWork, colorForWork));
+                step++;
 
-            pBrush.SurroundColors = colors;
-
-            // Set the center color to white.
-            //pBrush.CenterColor = Color.White;
-
-            // Use the path gradient brush to fill a rectangle.
-            e.Graphics.FillRectangle(pBrush, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+                bmp.SetPixel(point1.X, point1.Y, colorForWork);
+                pictureBox1.Invalidate();
+                
+                e2 = e1;
+                
+                if (e2 > -deltaX)
+                {
+                    e1 -= deltaY;
+                    point1.X += signX;
+                }
+                if (e2 < deltaY)
+                {
+                    e1 += deltaX;
+                    point1.Y += signY;
+                }
+            }
         }
+        private void DrawOneLineGradient(Point point1, Point point2, Color color1, Color color2) 
+        {   
+            step = 0;
+            steps = CalculateCountSteps(point1,point2);
+            
+            while (point1.X != point2.X || point1.Y != point2.Y)
+            {
+                Color colorForWork = LerpRGB(color1, color2);
+                bmp.SetPixel(point1.X, point1.Y, colorForWork);
+                pictureBox1.Invalidate();
+                
+                e2 = e1;
+                if (e2 > -deltaX)
+                {
+                    e1 -= deltaY;
+                    point1.X += signX;
+                }
+                if (e2 < deltaY)
+                {
+                    e1 += deltaX;
+                    point1.Y += signY;
+                }
+                step++;
+            }
+        }
+        private void CreateGradient(Color color1,Color color2,Color color3)
+        {
+            Dictionary<int, GradientColors> dict = new Dictionary<int, GradientColors>();
+            
+            DrawBordersGradient(points[0], points[1], color1, color2, dict);
+            DrawBordersGradient(points[0], points[2], color1, color3, dict);
+            DrawBordersGradient(points[1], points[2], color2, color3, dict);
+            
+            foreach (var t in dict)
+            {
+                int y = t.Key;
+                Point pt1 = new Point(t.Value.leftX, y);
+                Point pt2 = new Point(t.Value.rightX, y);
+                DrawOneLineGradient(pt1, pt2, t.Value.leftColor, t.Value.rightColor);
+            }
+        }
+
         public Form3()
         {
             InitializeComponent();
@@ -164,33 +182,20 @@ namespace Lab3
                 CounterSetPoint = 0;
                 pictureBox1.Invalidate();
             }
+
             points[CounterSetPoint] = new Point(e.X, e.Y);
             CounterSetPoint++;
             
-           Refresh();
+            Refresh();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             
             if (CounterSetPoint > 2) {
-                e.Graphics.Clear(Color.White);
-                e.Graphics.DrawPolygon(new Pen(Color.Black), points);
-                var g = pictureBox1.CreateGraphics();
-                CutTheTriangle(e);
-                
+                CreateGradient(Color.Blue,Color.Red,Color.Green);
             }
             
-        }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Form3_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
