@@ -20,6 +20,8 @@ namespace Lab5
         int iterations;
         SortedDictionary<char, string> rules;
         Stack<Tuple<double, double, double, double>> savedStates;
+        double re, gree, wi;
+        Random rand = new Random();
 
         public Form2()
         {
@@ -31,6 +33,8 @@ namespace Lab5
 
             rules = new SortedDictionary<char, string>();
             savedStates = new Stack<Tuple<double, double, double, double>>();
+            
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,6 +54,12 @@ namespace Lab5
                     direction = parameters[2];
 
                     rules.Clear();
+                    string[] rule;
+                    for (int i = 1; i < flines.Length; ++i)
+                    {
+                        rule = flines[i].Split('>');
+                        rules[Convert.ToChar(rule[0])] = rule[1];
+                    }
                 }
                 catch
                 {
@@ -168,12 +178,27 @@ namespace Lab5
             double yMin = yPoints.Min();
             double scale = Math.Max(xMax - xMin, yMax - yMin);
 
+            re = 98;
+            gree = 0;
+            wi = 3;
+
             foreach (var ps in lSystPoints)
-                g.DrawLine(Pens.Blue,
+            {
+                System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.FromArgb((int)re, (int)gree, 0));
+                Pen mypen = new Pen(myBrush);
+                mypen.Width = (float)wi;
+                g.DrawLine(mypen,
                     (float)((xMax - ps.Item1) / scale * pictureBox1.Width),
                     (float)((yMax - ps.Item2) / scale * pictureBox1.Height),
                     (float)((xMax - ps.Item3) / scale * pictureBox1.Width),
                     (float)((yMax - ps.Item4) / scale * pictureBox1.Height));
+                re -= 98 * 1.0 / lSystPoints.Count;
+                gree += 128 * 1.0 * 10/ lSystPoints.Count;
+                wi -= 8.0 / (float)lSystPoints.Count;
+                if (re < 0) re = 0;
+                if (gree > 128) gree = 128;
+                //angle = rand.Next(180);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
