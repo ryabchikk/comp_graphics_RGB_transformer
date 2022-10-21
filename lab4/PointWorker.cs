@@ -58,6 +58,8 @@ namespace lab4
                 float t = -1*GetScalarMult(n, ac) * 1.0f / div; 
                 Point k = new Point(-ba.Y, ba.X);
 
+               
+
                 float u = -1*GetScalarMult(k, ac) * 1.0f / div;
 
                 if (u>=0 && u< 1 && t >= 0 && t <= 1)
@@ -101,7 +103,7 @@ namespace lab4
             
             for(int i=0;i<Polygon.Count-1;i++)
             {
-
+                
                 PointF intersection = GetIntersectionPoint((Polygon[i], Polygon[i + 1]), (userPoint, inf));
                 if (!intersection.IsEmpty)
                 {
@@ -130,7 +132,8 @@ namespace lab4
         }
 
         private bool AreColinear(Point p,Point p1,Point p2)
-        {
+        {    
+            
             return p.X * (p1.Y - p2.Y) + p1.X * (p.Y - p2.Y) + p2.X * (p.Y - p1.Y) == 0;
         }
 
