@@ -33,8 +33,7 @@ namespace Lab5
 
             rules = new SortedDictionary<char, string>();
             savedStates = new Stack<Tuple<double, double, double, double>>();
-            
-
+           
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -197,7 +196,7 @@ namespace Lab5
                 wi -= 8.0 / (float)lSystPoints.Count;
                 if (re < 0) re = 0;
                 if (gree > 128) gree = 128;
-                //angle = rand.Next(180);
+                angle = rand.Next(180);
             }
         }
 

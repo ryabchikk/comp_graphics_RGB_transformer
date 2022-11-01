@@ -18,7 +18,7 @@ namespace Lab5
         private bool IsRemoving;
         private bool IsMoving;
         List<Point> ControlPoints;
-        private int CircleRadius = 3;
+        private int CircleRadius = 6;
 
         private int MovingPoint;
         public Form4()
