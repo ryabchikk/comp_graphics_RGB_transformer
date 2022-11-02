@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Lab6
 {
-    class Octahedron : Primitive
+    class Octahedron : IPrimitive
 	{
 		// кол-во вершин = 6
 		private List<XYZPoint> points = new List<XYZPoint>();

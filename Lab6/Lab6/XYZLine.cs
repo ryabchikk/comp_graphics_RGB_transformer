@@ -7,13 +7,15 @@ using System.Drawing;
 
 namespace Lab6
 {
-    class XYZLine : Primitive
+    class XYZLine : IPrimitive
     {
         private XYZPoint a;
         private XYZPoint b;
 
         public XYZPoint A { get { return a; } set { a = value; } }
         public XYZPoint B { get { return b; } set { b = value; } }
+
+        public XYZPoint Center => throw new NotImplementedException();
 
         public XYZLine(XYZPoint a, XYZPoint b)
         {

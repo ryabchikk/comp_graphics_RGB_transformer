@@ -15,10 +15,7 @@ namespace Lab6
         private Graphics perspective_g;
         private Bitmap perspective_bmp;
 
-        private Graphics orthographic_g;
-        private Bitmap orthographic_bmp;
-
-        private Primitive cur_primitive;
+        private IPrimitive cur_primitive;
 
 
         private Transform get_perpective_transform()
@@ -44,7 +41,7 @@ namespace Lab6
         //Рисует координатные оси 
         private void DrawAxis(Graphics g, Transform t, int width, int height)
         {
-            List<Primitive> p = new List<Primitive>();
+            List<IPrimitive> p = new List<IPrimitive>();
             XYZPoint a = new XYZPoint(0, 0, 0);
             XYZPoint b = new XYZPoint(0.8, 0, 0);
             XYZPoint c = new XYZPoint(0, 0.8, 0);
@@ -61,7 +58,7 @@ namespace Lab6
 
             p.Add(cur_primitive);
 
-            foreach (Primitive x in p)
+            foreach (IPrimitive x in p)
             {
                 x.Draw(g, t, width, height);
             }
@@ -73,12 +70,12 @@ namespace Lab6
             {
                 case "Тетраэдр":
                     {
-                       // cur_primitive = new Tetrahedron(0.5);
+                        cur_primitive = new Tetrahedron(0.5);
                         break;
                     }
                 case "Гексаэдр":
                     {
-                        //cur_primitive = new Hexahedron(0.5);
+                        cur_primitive = new Hexahedron(0.5);
                         break;
                     }
                 case "Октаэдр":
@@ -275,6 +272,11 @@ namespace Lab6
         }
 
         private void PerspectiveBox_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

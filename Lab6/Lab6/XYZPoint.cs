@@ -7,13 +7,15 @@ using System.Drawing;
 
 namespace Lab6
 {
-    class XYZPoint : Primitive
+    class XYZPoint : IPrimitive
     {
         private double[] coords = new double[] { 0, 0, 0, 1 };
 
         public double X { get { return coords[0]; } set { coords[0] = value; } }
         public double Y { get { return coords[1]; } set { coords[1] = value; } }
         public double Z { get { return coords[2]; } set { coords[2] = value; } }
+
+        public XYZPoint Center => throw new NotImplementedException();
 
         public XYZPoint() { }
 

@@ -52,11 +52,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hexahedron.cs" />
     <Compile Include="Icosahedron.cs" />
     <Compile Include="Octahedron.cs" />
-    <Compile Include="Primitive.cs" />
+    <Compile Include="IPrimitive.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tetrahedron.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Verge.cs" />
     <Compile Include="XYZLine.cs" />

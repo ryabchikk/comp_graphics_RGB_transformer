@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Lab6
 {
-    class Icosahedron : Primitive
+    class Icosahedron : IPrimitive
     {
         // кол-во вершин = 12
         private List<XYZPoint> points = new List<XYZPoint>();
