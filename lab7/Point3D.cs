@@ -16,7 +16,9 @@ namespace lab7
 
         private Transform transform;
 
-        public static PointF WorldCenter = new PointF(200,200);
+        public static PointF WorldCenter = new PointF(250,250);
+
+        public static string projection = "isometric";
 
         public Point3D(float X,float Y,float Z)
         {
@@ -25,6 +27,9 @@ namespace lab7
             this.Z = Z;
             transform = new Transform();
         }
+
+
+
 
         public void ApplyTransformation(Transform t)
         {
@@ -53,14 +58,40 @@ namespace lab7
             var res = ConvertTo2D();
             g.DrawEllipse(new Pen(Color.Black, 2), (float)res[0], (float)res[1], 2, 2);
         }
+        
+        private double Scale(double x)
+        {
+            return (x + 300) / 2 * WorldCenter.X;
+          
+        }
+        
+        private double[] ConvertToIsometric(double[] t)
+        {
+            var t1 = Transform.IsometricProjection() * new Transform(new double[,] { { t[0] }, { t[1] }, { t[2] } });
+            var t2 = new Transform(new double[,] { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } }) * t1;
+            return new double[] {WorldCenter.X+ t2.Matrix[0,0],WorldCenter.Y+ t2.Matrix[1,0]
+            };
+        }
+
+
+        private double[] ConvertToPerspective(double[] t)
+        {
+            var t2 = new Transform(new double[,] { { t[0] }, { t[1] }, { t[2] } , { 1 } }) * new Transform(new double[,] { { 1, 0, 0 , 0 }, { 0, 1, 0,0 }, { 0, 0, 0,100 },{ 0,0,0,1} }) * (1/(100*t[2]));
+            return new double[] {WorldCenter.X+ t2.Matrix[0,0],WorldCenter.Y+ t2.Matrix[1,0]
+            };
+        }
+
 
         public double[] ConvertTo2D()
         {
             double [] t = GetTransformedCoordinates(transform);
-            var  t1 = Transform.IsometricProjection()*new Transform(new double[,] { { t[0] },{ t[1]},{ t[2]} });
-            var t2 = new Transform(new double[,] { { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } }) * t1;
-            return new double[] {WorldCenter.X+ t2.Matrix[0,0],WorldCenter.Y+ t2.Matrix[1,0]
-            };
+            switch (Point3D.projection)
+            {
+                case "isometric": return ConvertToIsometric(t);
+                case "perspective" : return ConvertToPerspective(t);
+            }
+
+            return ConvertToIsometric(t);
         }
 
     }
