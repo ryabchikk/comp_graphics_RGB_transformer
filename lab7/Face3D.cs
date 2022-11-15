@@ -16,9 +16,9 @@ namespace lab7
         }
 
         public Face3D(params Line3D[] args)
-        {   
-            if(args != null)
-            lst = new List<Line3D>(args);
+        {
+            if (args != null)
+                lst = new List<Line3D>(args);
             else
                 lst = new List<Line3D>();
         }
@@ -30,7 +30,7 @@ namespace lab7
 
         public void Draw(Graphics g)
         {
-            foreach(var x in lst)
+            foreach (var x in lst)
             {
                 x.Draw(g);
             }
