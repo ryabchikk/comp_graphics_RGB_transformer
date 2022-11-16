@@ -14,5 +14,7 @@ namespace lab7
         void Apply(Transform t);
 
         string ToString();
+
+        int Count_Verges();
     }
 }

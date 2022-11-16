@@ -195,23 +195,6 @@ namespace lab7
             a.Apply(Transform.RotateX(X) * Transform.RotateY(Y) * Transform.RotateZ(Z));
         }
 
-        private void RotateLine()
-        {
-            float X1 = (float)numericUpDown14.Value;
-            float Y1 = (float)numericUpDown15.Value;
-            float Z1 = (float)numericUpDown16.Value;
-
-            float X2 = (float)numericUpDown17.Value;
-            float Y2 = (float)numericUpDown18.Value;
-            float Z2 = (float)numericUpDown19.Value;
-
-            Line3D l = new Line3D(new Point3D(X1, Y1, Z1), new Point3D(X2, Y2, Z2));
-
-            double ang = (double)numericUpDown20.Value / 180 * Math.PI;
-
-            //a.Apply(Transform.RotateLine(l, ang));
-        }
-
         private void ApplyAffin_Click(object sender, EventArgs e)
         {
             Clear();
@@ -253,7 +236,6 @@ namespace lab7
         private void ApplyLineRotation_Click(object sender, EventArgs e)
         {
             Clear();
-            RotateLine();
             a.Draw(g, null, 0, 0);
             DrawAxis();
             PerspectiveBox.Invalidate();
@@ -268,5 +250,159 @@ namespace lab7
         {
 
         }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Object Files(*.obj)| *.obj | Text files(*.txt) | *.txt | All files(*.*) | *.* ";
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string info = "";
+                    info += a.ToString() + "\r\n" + "\r\n";
+
+
+
+                    int num = 1;
+                    foreach (Point3D point in a.Points)
+                    {
+                        info += "Point #" + num;
+                        info += "\r\n";
+                        info += point.X + " ";
+                        info += point.Y + " ";
+                        info += point.Z;
+                        info += "\r\n";
+                        ++num;
+                    }
+                    info += "# " + a.Points.Count + " points\r\n";
+                    info += "\r\n";
+
+                    num = 1;
+                    foreach (Line3D v in a.Verges)
+                    {
+                        info += v.ToString() + " #" + num;
+
+                        info += "\r\n";
+                        for (int i = 0; i < (a.Count_Verges() - 1); ++i)
+                        {
+                            info +="(" + v.P1.X + " " + v.P1.Y + " " + v.P1.Z + ") (" + v.P2.X + " " + v.P2.Y + " " + v.P2.Z + ")";
+                            info += "\r\n";
+                        }
+                        if (num != a.Verges.Count)
+                            info += "\r\n";
+                        ++num;
+                    }
+                    info += "# " + a.Verges.Count + " verges\r\n";
+
+                    System.IO.File.WriteAllText(saveDialog.FileName, info);
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно сохранить файл",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog loadDialog = new OpenFileDialog();
+            loadDialog.Filter = "Object Files(*.obj)|*.obj|Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (loadDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Clear();
+                    List<Point3D> points = new List<Point3D>();
+                    List<Line3D> verges = new List<Line3D>();
+
+                    string str = System.IO.File.ReadAllText(loadDialog.FileName).Replace("\r\n", "!");
+                    string[] info = str.Split('!');
+
+                    string type_of_primitive = info[0];
+
+                    int cur_string = 3;
+                    while (cur_string < info.Length && info[cur_string] != "")
+                    {
+                        string[] coordinates = info[cur_string].Split(' ');
+
+                        float x = float.Parse(coordinates[0]);
+                        float y = float.Parse(coordinates[1]);
+                        float z = float.Parse(coordinates[2]);
+                        points.Add(new Point3D(x, y, z));
+                        cur_string += 2;
+                    }
+
+                    cur_string++;
+                    do
+                    {
+                        cur_string++;
+                        if (info[cur_string] == "")
+                            break;
+
+                        List<Point3D> vertices = new List<Point3D>();
+                        while (cur_string < info.Length - 1 && info[cur_string] != "" && info[cur_string][0] != '#')
+                        {
+                            string[] coordinates = info[cur_string].Split(' ');
+
+                            float x = float.Parse(coordinates[0]);
+                            float y = float.Parse(coordinates[1]);
+                            float z = float.Parse(coordinates[2]);
+                            vertices.Add(new Point3D(x, y, z));
+                            cur_string++;
+                        }
+
+                        //verges.Add(new Verge(vertices));
+                        cur_string++;
+                    }
+                    while (cur_string < info.Length - 1);
+
+                    switch (type_of_primitive)
+                    {
+                        case "Tetrahedron":
+                            {
+                                a = new Tetrahedron(160);
+                                break;
+                            }
+                        case "Octahedron":
+                            {
+                                a = new Octahedron(160);
+                                break;
+                            }
+                        case "Hexahedron":
+                            {
+                                a = new Hexahedron(160);
+                                break;
+                            }
+
+                        default:
+                            {
+                                a = new Hexahedron(160);
+                                break;
+                            }
+                    }
+
+                    DrawAxis();
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
+        }
     }
 }
+

@@ -86,5 +86,10 @@ namespace lab7
 			foreach (var Verge in Verges)
 				Verge.Draw(g);
 		}
+
+		public int Count_Verges()
+		{
+			return 24;
+		}
 	}
 }
