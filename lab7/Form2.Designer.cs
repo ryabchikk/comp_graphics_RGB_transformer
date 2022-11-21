@@ -29,18 +29,6 @@
         private void InitializeComponent()
         {
             this.PerspectiveBox = new System.Windows.Forms.PictureBox();
-            this.ApplyLineRotation = new System.Windows.Forms.Button();
-            this.numericUpDown20 = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.numericUpDown17 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown18 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown19 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown14 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown15 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown16 = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
@@ -75,14 +63,9 @@
             this.PerspectiveComboBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PerspectiveBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown17)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown19)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).BeginInit();
@@ -107,181 +90,6 @@
             this.PerspectiveBox.TabIndex = 0;
             this.PerspectiveBox.TabStop = false;
             this.PerspectiveBox.Click += new System.EventHandler(this.PerspectiveBox_Click);
-            // 
-            // ApplyLineRotation
-            // 
-            this.ApplyLineRotation.Location = new System.Drawing.Point(1056, 607);
-            this.ApplyLineRotation.Name = "ApplyLineRotation";
-            this.ApplyLineRotation.Size = new System.Drawing.Size(190, 34);
-            this.ApplyLineRotation.TabIndex = 90;
-            this.ApplyLineRotation.Text = "Применить";
-            this.ApplyLineRotation.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDown20
-            // 
-            this.numericUpDown20.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown20.Location = new System.Drawing.Point(1056, 567);
-            this.numericUpDown20.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.numericUpDown20.Minimum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            -2147483648});
-            this.numericUpDown20.Name = "numericUpDown20";
-            this.numericUpDown20.Size = new System.Drawing.Size(190, 22);
-            this.numericUpDown20.TabIndex = 89;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1256, 526);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 17);
-            this.label13.TabIndex = 88;
-            this.label13.Text = "Точка2";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1256, 483);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(56, 17);
-            this.label12.TabIndex = 87;
-            this.label12.Text = "Точка1";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1268, 567);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(38, 17);
-            this.label11.TabIndex = 86;
-            this.label11.Text = "Угол";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1071, 446);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(163, 17);
-            this.label10.TabIndex = 85;
-            this.label10.Text = "Поворот вокруг прямой";
-            // 
-            // numericUpDown17
-            // 
-            this.numericUpDown17.DecimalPlaces = 1;
-            this.numericUpDown17.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown17.Location = new System.Drawing.Point(1056, 526);
-            this.numericUpDown17.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown17.Name = "numericUpDown17";
-            this.numericUpDown17.Size = new System.Drawing.Size(54, 22);
-            this.numericUpDown17.TabIndex = 84;
-            // 
-            // numericUpDown18
-            // 
-            this.numericUpDown18.DecimalPlaces = 1;
-            this.numericUpDown18.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown18.Location = new System.Drawing.Point(1122, 526);
-            this.numericUpDown18.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown18.Name = "numericUpDown18";
-            this.numericUpDown18.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown18.TabIndex = 83;
-            // 
-            // numericUpDown19
-            // 
-            this.numericUpDown19.DecimalPlaces = 1;
-            this.numericUpDown19.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown19.Location = new System.Drawing.Point(1190, 526);
-            this.numericUpDown19.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown19.Name = "numericUpDown19";
-            this.numericUpDown19.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown19.TabIndex = 82;
-            // 
-            // numericUpDown14
-            // 
-            this.numericUpDown14.DecimalPlaces = 1;
-            this.numericUpDown14.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown14.Location = new System.Drawing.Point(1056, 483);
-            this.numericUpDown14.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown14.Name = "numericUpDown14";
-            this.numericUpDown14.Size = new System.Drawing.Size(54, 22);
-            this.numericUpDown14.TabIndex = 81;
-            // 
-            // numericUpDown15
-            // 
-            this.numericUpDown15.DecimalPlaces = 1;
-            this.numericUpDown15.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown15.Location = new System.Drawing.Point(1122, 483);
-            this.numericUpDown15.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown15.Name = "numericUpDown15";
-            this.numericUpDown15.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown15.TabIndex = 80;
-            // 
-            // numericUpDown16
-            // 
-            this.numericUpDown16.DecimalPlaces = 1;
-            this.numericUpDown16.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDown16.Location = new System.Drawing.Point(1190, 483);
-            this.numericUpDown16.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown16.Name = "numericUpDown16";
-            this.numericUpDown16.Size = new System.Drawing.Size(56, 22);
-            this.numericUpDown16.TabIndex = 79;
             // 
             // label9
             // 
@@ -746,7 +554,8 @@
             this.PrimitiveComboBox.Items.AddRange(new object[] {
             "Тетраэдр",
             "Гексаэдр",
-            "Октаэдр"});
+            "Октаэдр",
+            "Икосаэдр"});
             this.PrimitiveComboBox.Location = new System.Drawing.Point(109, 90);
             this.PrimitiveComboBox.Name = "PrimitiveComboBox";
             this.PrimitiveComboBox.Size = new System.Drawing.Size(190, 24);
@@ -802,28 +611,38 @@
             this.label14.TabIndex = 95;
             this.label14.Text = "Выберите многогранник";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(1056, 475);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(190, 34);
+            this.SaveButton.TabIndex = 96;
+            this.SaveButton.Text = "Сохранить";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(1056, 532);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(190, 34);
+            this.button3.TabIndex = 97;
+            this.button3.Text = "Загрузить";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1322, 734);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.PerspectiveLabel);
             this.Controls.Add(this.ApplyPerspective);
             this.Controls.Add(this.PerspectiveComboBox);
-            this.Controls.Add(this.ApplyLineRotation);
-            this.Controls.Add(this.numericUpDown20);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.numericUpDown17);
-            this.Controls.Add(this.numericUpDown18);
-            this.Controls.Add(this.numericUpDown19);
-            this.Controls.Add(this.numericUpDown14);
-            this.Controls.Add(this.numericUpDown15);
-            this.Controls.Add(this.numericUpDown16);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.numericUpDown11);
             this.Controls.Add(this.numericUpDown12);
@@ -857,13 +676,6 @@
             this.Name = "Form2";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.PerspectiveBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown20)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown17)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown18)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown19)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown14)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown15)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown13)).EndInit();
@@ -885,18 +697,6 @@
         #endregion
 
         private System.Windows.Forms.PictureBox PerspectiveBox;
-        private System.Windows.Forms.Button ApplyLineRotation;
-        private System.Windows.Forms.NumericUpDown numericUpDown20;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.NumericUpDown numericUpDown17;
-        private System.Windows.Forms.NumericUpDown numericUpDown18;
-        private System.Windows.Forms.NumericUpDown numericUpDown19;
-        private System.Windows.Forms.NumericUpDown numericUpDown14;
-        private System.Windows.Forms.NumericUpDown numericUpDown15;
-        private System.Windows.Forms.NumericUpDown numericUpDown16;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.NumericUpDown numericUpDown11;
         private System.Windows.Forms.NumericUpDown numericUpDown12;
@@ -931,6 +731,8 @@
         private System.Windows.Forms.ComboBox PerspectiveComboBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button button3;
     }
 }
 
