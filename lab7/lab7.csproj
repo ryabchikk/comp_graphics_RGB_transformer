@@ -78,7 +78,11 @@
     <Compile Include="Primitive.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+<<<<<<< HEAD
     <Compile Include="Tethraedron.cs" />
+=======
+    <Compile Include="Surface3D.cs" />
+>>>>>>> 2c1e268d0955e781415e92dd79907aef08b04dea
     <Compile Include="Transform.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
