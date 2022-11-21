@@ -61,8 +61,8 @@ namespace lab7
 			verges.Add(new Line3D(points[0], points[1]));
 
 			verges.Add(new Line3D(points[2], points[1]));
-			Verges.Add(new Line3D(points[1], points[3]));
-			Verges.Add(new Line3D(points[2], points[3]));
+			verges.Add(new Line3D(points[1], points[3]));
+			verges.Add(new Line3D(points[2], points[3]));
 
 			//Verges.Add(new Verge(new Point3D[] { points[2], points[4], points[3] }));
 			//Verges.Add(new Verge(new Point3D[] { points[4], points[5], points[3] }));
