@@ -15,6 +15,7 @@ namespace lab7
 
         Graphics g;
         Func<float, float, float> function;
+        Surface3D surface;
         public Form4()
         {
             InitializeComponent();
@@ -22,10 +23,13 @@ namespace lab7
             g = Graphics.FromImage(pictureBox1.Image);
             g.Clear(Color.DarkGray);
             comboBox1.Items.Add("x*x + y*y");
-            comboBox1.Items.Add("x + y");
-            comboBox1.Items.Add("x*x + y*y");
-            Point3D.projection = "perspective";
+            comboBox1.Items.Add("x*y");
 
+            comboBox2.Items.Add("perspective");
+            comboBox2.Items.Add("isometric");
+
+            Point3D.projection = "perspective";
+            surface = new Surface3D();
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -44,12 +48,14 @@ namespace lab7
             Point3D d = new Point3D(0, 0, 150);
 
 
-            var p1 = new Line3D(a, b);
-            var p2 = new Line3D(a, c);
-            var p3 = new Line3D(a, d);
-            p1.Draw(g, Pens.Green);
-            p2.Draw(g, Pens.Yellow);
-            p3.Draw(g, Pens.Red);
+            var pX = new Line3D(a, b);
+            var pC = new Line3D(a, c);
+            var pZ = new Line3D(a, d);
+            pX.Draw(g, Pens.Green);
+            pC.Draw(g, Pens.Yellow);
+            pZ.Draw(g, Pens.Red);
+
+
 
             /*
             foreach (var x in p1)
@@ -92,7 +98,7 @@ namespace lab7
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            ReDraw();
             DrawAxis();
             
             if(function != null)
@@ -121,7 +127,7 @@ namespace lab7
 
         private float SimpleFunction(float x, float y)
         {
-            return x + y ;
+            return x * y ;
         }
 
         Func<float, float, float> GetSelectedFunc(string func)
@@ -129,7 +135,7 @@ namespace lab7
             switch (func)
             {
                 case "x*x + y*y": return SimpleSquareFunction;
-                case "x+y": return SimpleFunction;
+                case "x*y": return SimpleFunction;
             }
 
             return SimpleSquareFunction;
@@ -144,7 +150,7 @@ namespace lab7
 
         private void DrawSurface(int x0,int x1,int y0,int y1,float stepX,float stepY)
         {
-            Surface3D surface = new Surface3D();
+           
             for(float x = x0;x < x1; x += stepX)
             {
                 for (float y = y0; y < y1; y += stepY)
@@ -173,8 +179,70 @@ namespace lab7
         private void button2_Click(object sender, EventArgs e)
         {
             Clear();
+            surface = new Surface3D();
             pictureBox1.Invalidate();
             DrawAxis();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Point3D.projection = comboBox2.SelectedItem.ToString();
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private Transform GetMoveParams()
+        {
+            return Transform.Translate((double)numericUpDown1.Value, (double)numericUpDown2.Value, (double)numericUpDown3.Value);
+        }
+
+        private Transform GetRotateParams()
+        {
+            var t1 = (double)numericUpDown4.Value / 180 * Math.PI;
+            var t2 = (double)numericUpDown5.Value / 180 * Math.PI;
+            var t3 = (double)numericUpDown6.Value / 180 * Math.PI;
+
+            return Transform.RotateX(t1) * Transform.RotateY(t2) * Transform.RotateZ(t3);
+        }
+
+        private Transform GetScaleParams()
+        {
+            return Transform.Scale((double)numericUpDown7.Value, (double)numericUpDown8.Value, (double)numericUpDown9.Value);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ReDraw();
+            surface.ApplyTransformation(GetScaleParams());
+            surface.ApplyTransformation(GetMoveParams());
+            surface.ApplyTransformation(GetRotateParams());
+            surface.Draw(g);
+            pictureBox1.Invalidate();
+        }
+
+        private void ReDraw()
+        {
+            g.Clear(Color.DarkGray);
+            DrawAxis();
+            pictureBox1.Invalidate();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

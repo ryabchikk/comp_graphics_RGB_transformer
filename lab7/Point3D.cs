@@ -28,9 +28,6 @@ namespace lab7
             transform = new Transform();
         }
 
-
-
-
         public void ApplyTransformation(Transform t)
         {
             transform *= t;
@@ -76,14 +73,15 @@ namespace lab7
 
         private double[] ConvertToPerspective(double[] t)
         {
-            var t2 = new Transform(new double[,] { { t[0] }, { t[1] }, { t[2] } , { 1 } }) * new Transform(new double[,] { { 1, 0, 0 , 0 }, { 0, 1, 0,0 }, { 0, 0, 0,100 },{ 0,0,0,1} }) * (1/(100*t[2]));
-            return new double[] {WorldCenter.X+ t2.Matrix[0,0],WorldCenter.Y+ t2.Matrix[1,0]
-            };
+            //  var t2 = new Transform(new double[,] { { t[0] }, { t[1] }, { t[2] } , { 1 } }) * new Transform(new double[,] { { 1, 0, 0 , 0 }, { 0, 1, 0,0 }, { 0, 0, 0,0.001 },{ 0,0,0,1} }) * (1/(0.0001*t[2]));
+            var t2 = new Transform(new double[,] { { t[0], t[1], t[2], 1 } }) * Transform.PerspectiveProjection(2);
+            return new double[] {WorldCenter.X  + t2.Matrix[0,0],WorldCenter.Y  + t2.Matrix[0,1]};
         }
 
 
         public double[] ConvertTo2D()
         {
+           // this.ApplyTransformation(Transform.RotateY(10));
             double [] t = GetTransformedCoordinates(transform);
             switch (Point3D.projection)
             {
