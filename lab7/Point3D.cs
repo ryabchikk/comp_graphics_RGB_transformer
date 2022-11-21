@@ -53,6 +53,12 @@ namespace lab7
             return res;
         }
 
+        public Point3D GetTransformedCoordinates()
+        {
+            var t = GetTransformedCoordinates(transform);
+            return new Point3D((float)t[0], (float)t[1], (float)t[2]);
+        }
+
         public void Draw(Graphics g)
         {
             var res = ConvertTo2D();
