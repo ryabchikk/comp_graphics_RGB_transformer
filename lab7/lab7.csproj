@@ -71,14 +71,22 @@
     <Compile Include="Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hexahedron.cs" />
     <Compile Include="Line3D.cs" />
+    <Compile Include="Octahedron.cs" />
     <Compile Include="Point3D.cs" />
+    <Compile Include="Primitive.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Surface3D.cs" />
+    <Compile Include="Tethraedron.cs" />
     <Compile Include="Surface3D.cs" />
     <Compile Include="Transform.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
