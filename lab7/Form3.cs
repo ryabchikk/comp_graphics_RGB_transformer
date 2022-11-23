@@ -159,7 +159,8 @@ namespace lab7
             double X = (double)numericUpDown1.Value;
             double Y = (double)numericUpDown2.Value;
             double Z = (double)numericUpDown3.Value;
-            a.Apply(Transform.Translate(X, Y, Z));
+            //a.Apply(Transform.Translate(X, Y, Z));
+            rotObj.ApplyTransformation(Transform.Translate(X, Y, Z));
         }
 
         //Поворот
@@ -168,7 +169,8 @@ namespace lab7
             double X = (double)numericUpDown4.Value / 180 * Math.PI;
             double Y = (double)numericUpDown5.Value / 180 * Math.PI;
             double Z = (double)numericUpDown6.Value / 180 * Math.PI;
-            a.Apply(Transform.RotateX(X) * Transform.RotateY(Y) * Transform.RotateZ(Z));
+            rotObj.ApplyTransformation(Transform.RotateX(X) * Transform.RotateY(Y) * Transform.RotateZ(Z));
+            //a.Apply(Transform.RotateX(X) * Transform.RotateY(Y) * Transform.RotateZ(Z));
         }
 
         //Масштаб
@@ -177,8 +179,8 @@ namespace lab7
             double X = (double)numericUpDown7.Value;
             double Y = (double)numericUpDown8.Value;
             double Z = (double)numericUpDown9.Value;
-            a.Apply(Transform.Scale(X, Y, Z));
-
+            //a.Apply(Transform.Scale(X, Y, Z));
+            rotObj.ApplyTransformation(Transform.Scale(X, Y, Z));
         }
 
         //Отражение
@@ -230,7 +232,8 @@ namespace lab7
             Translate();
             Rotate();
             Scale();
-            a.Draw(g, null, 0, 0);
+            //a.Draw(g, null, 0, 0);
+            rotObj.Draw(g);
             DrawAxis();
             PerspectiveBox.Invalidate();
         }
@@ -278,111 +281,6 @@ namespace lab7
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void LoadButton_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveDialog = new SaveFileDialog();
-            saveDialog.Filter = "Text files(*.txt) | *.txt | All files(*.*) | *.* ";
-            if (saveDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    string info = "";
-                    info += a.ToString() + "\r\n" + "\r\n";
-                    
-                    
-                    int num = 1;
-                    foreach (Line3D v in a.Verges)
-                    {
-                            var p1 = v.P1.GetTransformedCoordinates();
-                            var p2 = v.P2.GetTransformedCoordinates();
-                            info += p1.X + " " + p1.Y + " " + p1.Z + " " + p2.X + " " + p2.Y + " " + p2.Z;
-                            info += "\r\n";
-                        
-                        if (num != a.Verges.Count)
-                            info += "\r\n";
-                        ++num;
-                    }
-
-                    System.IO.File.WriteAllText(saveDialog.FileName, info);
-                }
-                catch
-                {
-                    DialogResult rezult = MessageBox.Show("Невозможно сохранить файл",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog loadDialog = new OpenFileDialog();
-            loadDialog.Filter = "Object Files(Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            if (loadDialog.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    Clear();
-                    List<Point3D> points = new List<Point3D>();
-                    List<Line3D> lines = new List<Line3D>();
-
-                    string str = System.IO.File.ReadAllText(loadDialog.FileName).Replace("\r\n", "!");
-                    string[] info = str.Split('!');
-
-                    string type_of_primitive = info[0];
-
-                    int cur_string = 2;
-                    while (cur_string < info.Length && info[cur_string] != "")
-                    {
-                        string[] coordinates = info[cur_string].Split(' ');
-
-                        float x = float.Parse(coordinates[0]);
-                        float y = float.Parse(coordinates[1]);
-                        float z = float.Parse(coordinates[2]);
-                        float x2 = float.Parse(coordinates[3]);
-                        float y2 = float.Parse(coordinates[4]);
-                        float z2 = float.Parse(coordinates[5]);
-                        points.Add(new Point3D(x, y, z));
-                        points.Add(new Point3D(x2, y2, z2));
-                        cur_string += 2;
-                    }
-
-                    DrawAxis();
-
-                    for (int i = 0; i < (points.Count()-2); i+=2)
-                    {
-                        lines.Add(new Line3D(points[i], points[i + 1]));
-                    }
-
-                    for (int i = 0; i < (lines.Count()); i++)
-                    {
-                        lines[i].Draw(g, Pens.Black);
-                        PerspectiveBox.Invalidate();
-                    }
-
-                    cur_string++;
-
-                    PerspectiveBox.Invalidate();
-
-                }
-                catch
-                {
-                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
-                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-            }
         }
         class RotationShape : Surface3D
         {
@@ -527,9 +425,6 @@ namespace lab7
             PerspectiveBox.Invalidate();
         }
 
-        private void PerspectiveBox_MouseClick(object sender, MouseEventArgs e)
-        {
-        }
 
         private void AddPoint_Click(object sender, EventArgs e)
         {
@@ -537,6 +432,101 @@ namespace lab7
             points.Add(point);
             point.Draw(g);
             PerspectiveBox.Invalidate();
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveDialog = new SaveFileDialog();
+            saveDialog.Filter = "Text files(*.txt) | *.txt | All files(*.*) | *.* ";
+            if (saveDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    string info = "";
+                    info += a.ToString() + "\r\n" + "\r\n";
+
+
+                    int num = 1;
+                    foreach (Line3D v in a.Verges)
+                    {
+                        var p1 = v.P1.GetTransformedCoordinates();
+                        var p2 = v.P2.GetTransformedCoordinates();
+                        info += p1.X + " " + p1.Y + " " + p1.Z + " " + p2.X + " " + p2.Y + " " + p2.Z;
+                        info += "\r\n";
+
+                        if (num != a.Verges.Count)
+                            info += "\r\n";
+                        ++num;
+                    }
+
+                    System.IO.File.WriteAllText(saveDialog.FileName, info);
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно сохранить файл",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog loadDialog = new OpenFileDialog();
+            loadDialog.Filter = "Object Files(Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (loadDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    Clear();
+                    List<Point3D> points = new List<Point3D>();
+                    List<Line3D> lines = new List<Line3D>();
+
+                    string str = System.IO.File.ReadAllText(loadDialog.FileName).Replace("\r\n", "!");
+                    string[] info = str.Split('!');
+
+                    string type_of_primitive = info[0];
+
+                    int cur_string = 2;
+                    while (cur_string < info.Length && info[cur_string] != "")
+                    {
+                        string[] coordinates = info[cur_string].Split(' ');
+
+                        float x = float.Parse(coordinates[0]);
+                        float y = float.Parse(coordinates[1]);
+                        float z = float.Parse(coordinates[2]);
+                        float x2 = float.Parse(coordinates[3]);
+                        float y2 = float.Parse(coordinates[4]);
+                        float z2 = float.Parse(coordinates[5]);
+                        points.Add(new Point3D(x, y, z));
+                        points.Add(new Point3D(x2, y2, z2));
+                        cur_string += 2;
+                    }
+
+                    DrawAxis();
+
+                    for (int i = 0; i < (points.Count() - 2); i += 2)
+                    {
+                        lines.Add(new Line3D(points[i], points[i + 1]));
+                    }
+
+                    for (int i = 0; i < (lines.Count()); i++)
+                    {
+                        lines[i].Draw(g, Pens.Black);
+                        PerspectiveBox.Invalidate();
+                    }
+
+                    cur_string++;
+
+                    PerspectiveBox.Invalidate();
+
+                }
+                catch
+                {
+                    DialogResult rezult = MessageBox.Show("Невозможно открыть выбранный файл",
+                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+            }
         }
     }
 }
