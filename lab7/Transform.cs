@@ -152,10 +152,10 @@ namespace lab7
         {
             return new Transform(
                 new double[,] {
-                    { 1 / distance, 0, 0, 0 },
-                    { 0, 1 / distance, 0, 0 },
-                    { 0, 0, 0, 2 },
-                    { 0, 0, 0, 1/distance }
+                    { 1, 0, 0, 0 },
+                    { 0, 1 , 0, 0 },
+                    { 0, 0, 0, distance },
+                    { 0, 0, 0, 1 }
                 });
         }
 
