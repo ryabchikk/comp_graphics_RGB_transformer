@@ -50,42 +50,6 @@ namespace lab7
             */
         }
 
-        private void GetPrimitive()
-        {
-            switch (PrimitiveComboBox.SelectedItem.ToString())
-            {
-                case "Тетраэдр":
-                    {
-                        a = new Tetrahedron(160);
-                        break;
-                    }
-                case "Гексаэдр":
-                    {
-                       a = new Hexahedron(160);
-                        break;
-                    }
-                case "Октаэдр":
-                    {
-                        a = new Octahedron(160);
-                        break;
-                    }
-                case "Икосаэдр":
-                    {
-                        //cur_primitive = new Icosahedron(0.5);
-                        break;
-                    }
-                case "Додекаэдр":
-                    {
-                        //cur_primitive = new Dodecahedron(0.5);
-                        break;
-                    }
-                default:
-                    {
-                        Octahedron a = new Octahedron(160);
-                        break;
-                    }
-            }
-        }
         private void GetAxisXYZ()
         {
             switch (comboBox1.SelectedItem.ToString())
@@ -128,10 +92,6 @@ namespace lab7
 
             //Инициализируем ComboBox для отображения проекций
             PerspectiveComboBox.SelectedItem = PerspectiveComboBox.Items[1];
-            PrimitiveComboBox.SelectedItem = PrimitiveComboBox.Items[2];
-            ReflectionComboBox.SelectedItem = ReflectionComboBox.Items[0];
-
-            GetPrimitive();
             DrawAxis();
         }
 
@@ -147,7 +107,6 @@ namespace lab7
         private void ApplyPrimitive_Click(object sender, EventArgs e)
         {
             Clear();
-            GetPrimitive();
             a.Draw(g,null,0,0);
             DrawAxis();
             PerspectiveBox.Invalidate();
@@ -183,34 +142,6 @@ namespace lab7
             rotObj.ApplyTransformation(Transform.Scale(X, Y, Z));
         }
 
-        //Отражение
-        private void Reflect()
-        {
-            switch (ReflectionComboBox.SelectedItem.ToString())
-            {
-                case "Отражение по X":
-                    {
-                        a.Apply(Transform.ReflectX());
-                        break;
-                    }
-                case "Отражение по Y":
-                    {
-                        a.Apply(Transform.ReflectY());
-                        break;
-                    }
-                case "Отражение по Z":
-                    {
-                        a.Apply(Transform.ReflectZ());
-                        break;
-                    }
-                default:
-                    {
-                        a.Apply(Transform.ReflectX());
-                        break;
-                    }
-            }
-        }
-
         //Масштабирование относительно центра
         private void ScaleCenter()
         {
@@ -241,7 +172,6 @@ namespace lab7
         private void ApplyReflection_Click(object sender, EventArgs e)
         {
             Clear();
-            Reflect();
             a.Draw(g, null, 0, 0);
             DrawAxis();
             PerspectiveBox.Invalidate();
