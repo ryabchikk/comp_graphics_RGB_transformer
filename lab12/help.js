@@ -60,7 +60,7 @@ function toRadians (angle) {
                           ]);
   }
   
-
+ 
   
   function GetRotationMatrixX(angle){
      angle = toRadians(angle);
@@ -129,5 +129,116 @@ function toRadians (angle) {
      return res;
   }
   
-
-  
+ 
+ function CreateShader(gl,type,shaderSource){
+   var shader = gl.createShader(type);
+   gl.shaderSource(shader,shaderSource);
+ 
+   gl.compileShader(shader);
+   
+   if(!gl.getShaderParameter(shader,gl.COMPILE_STATUS)){
+    console.log('ERROR compiling shader');
+    console.log(gl.getShaderInfoLog(shader));
+ } 
+ 
+  return shader;
+ 
+ }
+ 
+ 
+ function CreateProgram(gl,vertexShader,fragmentShader){
+    var program = gl.createProgram();
+    gl.attachShader(program,vertexShader);
+    gl.attachShader(program,fragmentShader);
+    gl.linkProgram(program);
+ 
+    if(!gl.getProgramParameter(program, gl.LINK_STATUS)){
+       console.log('ERROR compiling program');
+       console.log(gl.getProgramInfoLog(program));
+    }
+ 
+    gl.validateProgram(program);
+     if (!gl.getProgramParameter(program, gl.VALIDATE_STATUS)) {
+         console.error('ERROR validating program!', gl.getProgramInfoLog(program));
+         return null;}
+ 
+    return program;
+ }
+ 
+ 
+ 
+ function GetCubeCoordinates(){
+   return new Float32Array([
+    //top            color           texture
+    -1.0,1.0,-1.0,   1.0,0.0,0.0, 0.0,0.0,
+    -1.0,1.0,1.0,   0.0,1.0,0.0,  0.0,1.0, 
+    1.0,1.0,1.0,   0.0,0.0,1.0,   1.0,1.0,
+    1.0,1.0,-1.0,   1.0,1.0,0.0,  1.0,0.0,
+    
+    //left
+    -1.0,1.0,1.0,   1.0,0.0,0.0,   0.0,0.0,
+    -1.0,-1.0,1.0,   0.0,1.0,0.0,  1.0,0.0,
+    -1.0,-1.0,-1.0,   0.0,0.0,1.0, 1.0,1.0,
+    -1.0,1.0,-1.0,   1.0,1.0,0.0,  0.0,1.0,
+ 
+    //right
+    1.0,1.0,1.0,  1.0,0.0,0.0,    1.0,1.0,
+    1.0,-1.0,1.0,   0.0,1.0,0.0,   0.0,1.0,
+    1.0,-1.0,-1.0,   0.0,0.0,1.0,  0.0,0.0,
+    1.0,1.0,-1.0,   1.0,1.0,0.0,   1.0,0.0,
+    
+    //front
+    1.0,1.0,1.0,   1.0,0.0,0.0,   1.0,1.0,
+    1.0,-1.0,1.0,   0.0,1.0,0.0,  1.0,0.0,
+    -1.0,-1.0,1.0,   0.0,0.0,1.0, 0.0,0.0,
+    -1.0,1.0,1.0,   1.0,1.0,0.0,  0.0,1.0,
+    
+    //back
+    1.0,1.0,-1.0,   1.0,0.0,0.0, 0.0, 0.0,
+    1.0,-1.0,-1.0,   0.0,1.0,0.0, 0.0, 1.0,
+    -1.0,-1.0,-1.0,   0.0,0.0,1.0, 1.0, 1.0,
+    -1.0,1.0,-1.0,   1.0,1.0,0.0,  1.0, 0.0,
+ 
+    //bottom
+    -1.0,-1.0,-1.0,   1.0,0.0,0.0, 1.0, 1.0,
+    -1.0,-1.0,1.0,   0.0,1.0,0.0,  1.0, 0.0,
+    1.0,-1.0,1.0,   0.0,0.0,1.0,   0.0, 0.0,
+    1.0,-1.0,-1.0,   1.0,1.0,0.0,  0.0, 1.0
+   ]);
+ }
+ 
+ function GetCubeIndeces(){
+    return new Uint16Array([
+       //top
+       0,1,2,
+       0,2,3,
+ 
+       //left
+       5,4,6,
+       6,4,7,
+ 
+       //right
+       8,9,10,
+       8,10,11,
+ 
+       //front
+       13,12,14,
+       15,14,12,
+ 
+       //back
+       16,17,18,
+       16,18,19,
+       
+       //bottom
+       21,20,22,
+       22,20,23
+    ]);
+ }
+ 
+ 
+ function SetDefaultSettings(gl){
+    gl.clearColor(0.7,0.7,0.7,1.0);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.enable(gl.DEPTH_TEST);
+ }
+ 
