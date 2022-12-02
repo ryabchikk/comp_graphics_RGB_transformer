@@ -52,9 +52,6 @@
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.PerspectiveLabel = new System.Windows.Forms.Label();
-            this.ApplyPerspective = new System.Windows.Forms.Button();
-            this.PerspectiveComboBox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
             this.loadButton = new System.Windows.Forms.Button();
@@ -194,7 +191,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(79, 230);
+            this.label8.Location = new System.Drawing.Point(81, 74);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(126, 13);
@@ -203,7 +200,7 @@
             // 
             // ApplyScaleCenter
             // 
-            this.ApplyScaleCenter.Location = new System.Drawing.Point(81, 283);
+            this.ApplyScaleCenter.Location = new System.Drawing.Point(83, 127);
             this.ApplyScaleCenter.Margin = new System.Windows.Forms.Padding(2);
             this.ApplyScaleCenter.Name = "ApplyScaleCenter";
             this.ApplyScaleCenter.Size = new System.Drawing.Size(142, 28);
@@ -220,7 +217,7 @@
             0,
             0,
             65536});
-            this.numericUpDown10.Location = new System.Drawing.Point(81, 260);
+            this.numericUpDown10.Location = new System.Drawing.Point(83, 104);
             this.numericUpDown10.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown10.Maximum = new decimal(new int[] {
             5,
@@ -244,7 +241,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 461);
+            this.label6.Location = new System.Drawing.Point(22, 331);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(53, 13);
@@ -254,7 +251,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 428);
+            this.label5.Location = new System.Drawing.Point(24, 298);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 13);
@@ -269,7 +266,7 @@
             0,
             0,
             65536});
-            this.numericUpDown7.Location = new System.Drawing.Point(82, 459);
+            this.numericUpDown7.Location = new System.Drawing.Point(80, 329);
             this.numericUpDown7.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown7.Maximum = new decimal(new int[] {
             5,
@@ -298,7 +295,7 @@
             0,
             0,
             65536});
-            this.numericUpDown8.Location = new System.Drawing.Point(132, 459);
+            this.numericUpDown8.Location = new System.Drawing.Point(130, 329);
             this.numericUpDown8.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown8.Maximum = new decimal(new int[] {
             5,
@@ -327,7 +324,7 @@
             0,
             0,
             65536});
-            this.numericUpDown9.Location = new System.Drawing.Point(183, 459);
+            this.numericUpDown9.Location = new System.Drawing.Point(181, 329);
             this.numericUpDown9.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown9.Maximum = new decimal(new int[] {
             5,
@@ -355,7 +352,7 @@
             0,
             0,
             0});
-            this.numericUpDown4.Location = new System.Drawing.Point(82, 427);
+            this.numericUpDown4.Location = new System.Drawing.Point(80, 297);
             this.numericUpDown4.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown4.Maximum = new decimal(new int[] {
             360,
@@ -378,7 +375,7 @@
             0,
             0,
             0});
-            this.numericUpDown5.Location = new System.Drawing.Point(132, 427);
+            this.numericUpDown5.Location = new System.Drawing.Point(130, 297);
             this.numericUpDown5.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown5.Maximum = new decimal(new int[] {
             360,
@@ -401,7 +398,7 @@
             0,
             0,
             0});
-            this.numericUpDown6.Location = new System.Drawing.Point(183, 427);
+            this.numericUpDown6.Location = new System.Drawing.Point(181, 297);
             this.numericUpDown6.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown6.Maximum = new decimal(new int[] {
             360,
@@ -420,7 +417,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 393);
+            this.label4.Location = new System.Drawing.Point(17, 263);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(61, 13);
@@ -430,7 +427,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(196, 368);
+            this.label3.Location = new System.Drawing.Point(194, 238);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 13);
@@ -440,7 +437,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(146, 368);
+            this.label2.Location = new System.Drawing.Point(144, 238);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(14, 13);
@@ -450,7 +447,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(95, 368);
+            this.label1.Location = new System.Drawing.Point(93, 238);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(14, 13);
@@ -465,7 +462,7 @@
             0,
             0,
             131072});
-            this.numericUpDown3.Location = new System.Drawing.Point(184, 392);
+            this.numericUpDown3.Location = new System.Drawing.Point(182, 262);
             this.numericUpDown3.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown3.Maximum = new decimal(new int[] {
             5,
@@ -489,7 +486,7 @@
             0,
             0,
             131072});
-            this.numericUpDown2.Location = new System.Drawing.Point(133, 392);
+            this.numericUpDown2.Location = new System.Drawing.Point(131, 262);
             this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             5,
@@ -513,7 +510,7 @@
             0,
             0,
             131072});
-            this.numericUpDown1.Location = new System.Drawing.Point(82, 392);
+            this.numericUpDown1.Location = new System.Drawing.Point(80, 262);
             this.numericUpDown1.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown1.Maximum = new decimal(new int[] {
             5,
@@ -529,43 +526,9 @@
             this.numericUpDown1.Size = new System.Drawing.Size(42, 20);
             this.numericUpDown1.TabIndex = 53;
             // 
-            // PerspectiveLabel
-            // 
-            this.PerspectiveLabel.AutoSize = true;
-            this.PerspectiveLabel.Location = new System.Drawing.Point(81, 75);
-            this.PerspectiveLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.PerspectiveLabel.Name = "PerspectiveLabel";
-            this.PerspectiveLabel.Size = new System.Drawing.Size(110, 13);
-            this.PerspectiveLabel.TabIndex = 93;
-            this.PerspectiveLabel.Text = "Выберите проекцию";
-            // 
-            // ApplyPerspective
-            // 
-            this.ApplyPerspective.Location = new System.Drawing.Point(81, 120);
-            this.ApplyPerspective.Margin = new System.Windows.Forms.Padding(2);
-            this.ApplyPerspective.Name = "ApplyPerspective";
-            this.ApplyPerspective.Size = new System.Drawing.Size(142, 28);
-            this.ApplyPerspective.TabIndex = 92;
-            this.ApplyPerspective.Text = "Применить";
-            this.ApplyPerspective.UseVisualStyleBackColor = true;
-            this.ApplyPerspective.Click += new System.EventHandler(this.ApplyPerspective_Click);
-            // 
-            // PerspectiveComboBox
-            // 
-            this.PerspectiveComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.PerspectiveComboBox.FormattingEnabled = true;
-            this.PerspectiveComboBox.Items.AddRange(new object[] {
-            "Перспективная",
-            "Изометрическая"});
-            this.PerspectiveComboBox.Location = new System.Drawing.Point(81, 93);
-            this.PerspectiveComboBox.Margin = new System.Windows.Forms.Padding(2);
-            this.PerspectiveComboBox.Name = "PerspectiveComboBox";
-            this.PerspectiveComboBox.Size = new System.Drawing.Size(144, 21);
-            this.PerspectiveComboBox.TabIndex = 91;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(81, 493);
+            this.button1.Location = new System.Drawing.Point(79, 363);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(142, 28);
@@ -737,9 +700,6 @@
             this.Controls.Add(this.loadButton);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.PerspectiveLabel);
-            this.Controls.Add(this.ApplyPerspective);
-            this.Controls.Add(this.PerspectiveComboBox);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.numericUpDown11);
             this.Controls.Add(this.numericUpDown12);
@@ -816,9 +776,6 @@
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label PerspectiveLabel;
-        private System.Windows.Forms.Button ApplyPerspective;
-        private System.Windows.Forms.ComboBox PerspectiveComboBox;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button loadButton;

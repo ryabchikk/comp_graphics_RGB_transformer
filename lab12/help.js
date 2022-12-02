@@ -99,7 +99,16 @@ function toRadians (angle) {
      ]);
   }
   
-  function MultiplayMatrix(m1,m2,row,col){
+  function GetTranslateMatrixXYZ(tx,ty,tz){
+   return new Float32Array([
+      1,0,0,0,
+      0,1,0,0,
+      0,0,1,0,
+      tx,ty,tz,1
+   ]);
+}
+
+function MultiplayMatrix(m1,m2,row,col){
      var res = new Float32Array(row*col);
      for (let i = 0; i < row; i++) {
         for (let j = 0; j < col; j++) {
@@ -163,7 +172,7 @@ function toRadians (angle) {
          return null;}
  
     return program;
- }
+   }
  
  
  
@@ -242,3 +251,59 @@ function toRadians (angle) {
     gl.enable(gl.DEPTH_TEST);
  }
  
+ function GetTetrahedronCoordinates()
+ {
+   return new Float32Array([
+    //base            color      
+  //0
+    -1.0,-1.0,1.0,   1.0,0.0,0.0, 
+  //1  
+    0.0,1.0,1.0,   0.0,1.0,0.0, 
+  //2  
+    1.0,-1.0,1.0,   0.0,0.0,1.0,  
+    
+    //left
+  //3 
+    -1.0,-1.0,1.0,   1.0,0.0,0.0,
+  //4 
+    0.0,1.0,1.0,   0.0,1.0,0.0,
+  //5  
+    0.0,0.0,-1.0,   1.0,1.0,1.0,
+    
+ 
+    //right
+  //6 
+    1.0,-1.0,1.0, 0.0,0.0,1.0,
+  //7  
+    0.0,0.0,-1.0,   1.0,1.0,1.0,
+  //8  
+    0.0,1.0,1.0,   0.0,1.0,0.0,
+    
+    
+    //front
+  //9  
+    -1.0,-1.0,1.0,   1.0,0.0,0.0,
+  //10  
+    0.0,0.0,-1.0,   1.0,1.0,1.0,
+  //11  
+    1.0,-1.0,1.0,   0.0,0.0,1.0,
+      
+   ])
+ }
+
+ function GetTetrahedronIndeces(){
+   return new Uint16Array([
+      
+      //base
+      0,1,2,
+      
+      //right
+      3,4,5,
+
+      //left
+      6,7,8,
+
+      //back
+      9, 10,11
+   ]);
+}

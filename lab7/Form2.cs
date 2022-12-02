@@ -355,6 +355,11 @@ namespace lab7
 
             }
         }
+
+        private void PerspectiveComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Point3D.projection = PerspectiveComboBox.SelectedItem.ToString();
+        }
     }
 }
 
