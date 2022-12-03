@@ -91,15 +91,6 @@ namespace lab7
             PerspectiveBox.Image = perspective_bmp;
 
             //Инициализируем ComboBox для отображения проекций
-            PerspectiveComboBox.SelectedItem = PerspectiveComboBox.Items[1];
-            DrawAxis();
-        }
-
-        private void ApplyPerspective_Click(object sender, EventArgs e)
-        {
-            perspective_bmp = new Bitmap(PerspectiveBox.Width, PerspectiveBox.Height);
-            g = Graphics.FromImage(perspective_bmp);
-            PerspectiveBox.Image = perspective_bmp;
             DrawAxis();
         }
 
