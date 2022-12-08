@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <style>
+           
+            .page {
+                text-align:center;
+                background-color: rgba(178,178,178,1.0);
+                float: left;
+                margin: 2px;
+                width: 600px;
+                height: 600px;
+              }
+            
+              .pageHolder{
+                  overflow: auto;
+                  display: flex;
+                }     
+        </style>
+        <script type="text/javascript" src="help.js"></script>
+        <body>
+            <div class="pageHolder">
+        
+        <div onclick="start()" class="page">
+            <canvas id="test" width="600" height="600">
+                error!
+            </canvas>
+            <script src="engine.js"></script>
+           <img id="crate" src="bricks2.jpg" width="0" height="0"></img>
+        </div>
+        
+        <div onclick="start_textures()" class="page">
+            <canvas id="task3" width="600" height="600">
+                error!
+            </canvas>
+            <script src="engine.js"></script>
+           <img id="crate" src="bricks2.jpg" width="0" height="0"></img>
+           <img id="nebula" src="proc_sheet_nebula.jpg" width="0" height="0"></img>
+        </div>
+        
+        <div onclick="start_tetrahedron()" class="page">
+            <canvas id="task1" width="600" height="600">
+                error!
+            </canvas>
+            <script src="engine.js"></script>
+           <img id="crate" src="bricks2.jpg" width="0" height="0"></img>
+           <img id="nebula" src="proc_sheet_nebula.jpg" width="0" height="0"></img>
+        </div>
+
+            </div>
+        
+    </head>
+</html>
