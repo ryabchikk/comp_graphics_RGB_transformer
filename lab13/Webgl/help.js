@@ -329,3 +329,70 @@ async function parseObjFile(path){
    return webglCoords;      
 }
 
+function InitializeEvent(){
+   var addEvent = document.addEventListener ? function(target,type,action){
+      if(target){
+          target.addEventListener(type,action,false);
+              }
+      } : function(target,type,action){
+      if(target){
+          target.attachEvent('on' + type,action,false);
+      }
+     }
+   return addEvent;
+}
+
+function HandleButtonUsingEventForCamera(view_matr,gl,numKey,argCoordinates,indexCoordinate,flag){
+   var addEvent=InitializeEvent();
+   
+   addEvent(document,'keydown',function(e){
+      e = e || window.event;
+      var key = e.which || e.keyCode;
+      if(key==numKey){
+         if(flag){
+            argCoordinates[indexCoordinate]+=0.5;
+         }
+         else{
+            argCoordinates[indexCoordinate]-=0.5;
+         }
+          var viewmat4 = GetViewMatrix([argCoordinates[0],argCoordinates[1],argCoordinates[2]-9],[argCoordinates[0],argCoordinates[1],0],[0,1,0]);
+          gl.uniformMatrix4fv(view_matr,gl.FALSE,viewmat4);
+      }
+     });
+}
+
+function TranslateCamera(view_matr,gl,argCoordinates){
+   HandleButtonUsingEventForCamera(view_matr,gl,37,argCoordinates,0,true);
+   HandleButtonUsingEventForCamera(view_matr,gl,39,argCoordinates,0,false);
+     
+   HandleButtonUsingEventForCamera(view_matr,gl,38,argCoordinates,1,true);
+   HandleButtonUsingEventForCamera(view_matr,gl,40,argCoordinates,1,false);
+
+   HandleButtonUsingEventForCamera(view_matr,gl,33,argCoordinates,2,true);
+   HandleButtonUsingEventForCamera(view_matr,gl,34,argCoordinates,2,false);
+   
+}
+
+function TestHandleButtonUsingEventForCamera(view_matr,gl,numKey,argCoordinates,argCoordinatesAngle,indexCoordinate,flag){
+   var addEvent=InitializeEvent();
+   
+   addEvent(document,'keydown',function(e){
+      e = e || window.event;
+      var key = e.which || e.keyCode;
+      if(key==numKey){
+         if(flag){
+            argCoordinatesAngle[indexCoordinate]+=3;
+         }
+         else{
+            argCoordinatesAngle[indexCoordinate]-=3;
+         }
+         //var Y=Math.cos(argCoordinatesAngle[indexCoordinate])*argCoordinates[1]-Math.sin(argCoordinatesAngle[indexCoordinate])*argCoordinates[2];
+         //var viewmat4 = GetViewMatrix([argCoordinates[0],Y,argCoordinates[2]-9],[argCoordinates[0],Y,0],[0,1,0]);
+         var worldm4 = GetRotationMatrixY(argCoordinatesAngle[1]);
+         worldm4[14]=-9;
+         //var viewmat4 = GetViewMatrix([argCoordinatesAngle[0],argCoordinates[1],argCoordinates[2]-9],[0,0,0],[0,1,0]);
+         //gl.uniformMatrix4fv(view_matr,gl.FALSE,worldm4);
+         gl.uniformMatrix4fv(view_matr,gl.FALSE,worldm4);
+      }
+     });
+}
